@@ -1,7 +1,7 @@
 package com.ke.wanandroid.api
 
-import com.ke.wanandroidapi.response.WanBaseResponse
-import com.ke.wanandroidapi.response.WanLoginResponse
+import com.ke.wanandroid.api.response.WanBaseResponse
+import com.ke.wanandroid.api.response.WanLoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

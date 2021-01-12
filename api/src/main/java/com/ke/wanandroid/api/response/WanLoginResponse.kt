@@ -1,13 +1,16 @@
-package com.ke.wanandroidapi.response
+package com.ke.wanandroid.api.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class WanLoginResponse(
+@Parcelize
+data class WanLoginResponse (
     @SerializedName("admin")
     val admin: Boolean,
-    @SerializedName("chapterTops")
-    val chapterTops: List<Any>,
+//    @SerializedName("chapterTops")
+//    val chapterTops: List<Any>,
     @SerializedName("coinCount")
     val coinCount: Int,
     @SerializedName("collectIds")
@@ -30,4 +33,4 @@ data class WanLoginResponse(
     val type: Int,
     @SerializedName("username")
     val username: String
-)
+):Parcelable

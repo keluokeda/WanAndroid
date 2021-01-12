@@ -1,7 +1,12 @@
-package com.ke.wanandroidapi.response
+package com.ke.wanandroid.api.response
 
-data class WanBaseResponse<T>(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class WanBaseResponse<T : Parcelable>(
     val errorCode: Int,
     val errorMsg: String,
     val data: T?
-)
+):Parcelable
+
