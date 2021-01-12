@@ -1,0 +1,4 @@
+include ':common'
+include ':api'
+include ':app'
+rootProject.name = "WanAndroid"
