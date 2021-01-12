@@ -1,4 +1,5 @@
 # 使用JetPack框架MVVM模式实现的 WanAndroid 客户端
+## 目前还在施工中
 #### 项目中使用到的WanAndroid的接口放在了api模块下，有需要的可以直接使用。
 
 ## 项目技术点
