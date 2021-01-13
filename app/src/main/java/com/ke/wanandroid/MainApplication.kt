@@ -1,15 +1,15 @@
-package com.ke.wanandroid.common
+package com.ke.wanandroid
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MainApplication : Application() {
+class MainApplication:Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
+        if(BuildConfig.DEBUG){
             ARouter.openLog()
             ARouter.openDebug()
         }

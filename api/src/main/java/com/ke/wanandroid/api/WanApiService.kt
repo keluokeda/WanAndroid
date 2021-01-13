@@ -1,10 +1,7 @@
 package com.ke.wanandroid.api
 
-import com.ke.wanandroid.api.response.WanBaseResponse
-import com.ke.wanandroid.api.response.WanLoginResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import com.ke.wanandroid.api.response.*
+import retrofit2.http.*
 
 interface WanApiService {
 
@@ -18,6 +15,9 @@ interface WanApiService {
         @Field("password") passWord: String
     ): WanBaseResponse<WanLoginResponse>
 
+    /**
+     * 注册
+     */
     @FormUrlEncoded
     @POST("/user/register")
     suspend fun register(
@@ -25,6 +25,20 @@ interface WanApiService {
         @Field("password") passWord: String,
         @Field("repassword") rePassWord: String
     ): WanBaseResponse<WanLoginResponse>
+
+    /**
+     * 首页banner
+     */
+    @GET("banner/json")
+    suspend fun getBanner(): WanBaseListResponse<WanBannerResponse>
+
+    /**
+     * 首页文章列表
+     * 方法：GET
+     * 参数：页码，拼接在连接中，从0开始。
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
