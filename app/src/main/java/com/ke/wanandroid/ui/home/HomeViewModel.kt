@@ -4,14 +4,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ke.mvvm.base.ui.BaseViewModel
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanBannerResponse
-import com.ke.wanandroid.common.entity.Result
-import com.ke.wanandroid.common.ui.BaseViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import com.ke.mvvm.base.data.Result
 
-class HomeViewModel @ViewModelInject constructor(private val homeRepository: HomeRepository) :
+
+class HomeViewModel @ViewModelInject constructor(
+    private val homeRepository: HomeRepository
+) :
     BaseViewModel() {
 
     private var _currentIndex = 0

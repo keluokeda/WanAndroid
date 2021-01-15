@@ -2,9 +2,8 @@ package com.ke.wanandroid.ui.home
 
 import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.api.response.*
-import com.ke.wanandroid.common.entity.Result
-import java.lang.Exception
 import javax.inject.Inject
+import com.ke.mvvm.base.data.Result
 
 class HomeRepository @Inject constructor(private val wanApiService: WanApiService) {
 

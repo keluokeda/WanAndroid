@@ -8,8 +8,7 @@
     android:paddingStart="16dp"
     android:paddingTop="8dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="8dp"
-    tools:viewBindingIgnore="true">
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/is_new"
@@ -28,10 +27,10 @@
 
     <TextView
         android:id="@+id/author"
-        android:layout_marginTop="3dp"
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:paddingStart="0dp"
         android:paddingEnd="4dp"
         app:layout_constraintStart_toEndOf="@id/is_new"
@@ -88,8 +87,8 @@
         android:maxLines="1"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/chapter"
-        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/author"
         app:layout_constraintVertical_bias="0.0"
         tools:text="手把手教你自定义Gradle插件" />
@@ -99,14 +98,13 @@
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
         android:maxLines="3"
-        tools:text="@string/test_desc"
+        android:paddingTop="4dp"
         app:layout_constraintBottom_toTopOf="@id/chapter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        tools:text="@string/test_desc" />
 
     <TextView
         android:id="@+id/chapter"
@@ -118,7 +116,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="开源项目主Tab.未分类" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

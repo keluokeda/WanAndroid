@@ -40,6 +40,28 @@ interface WanApiService {
     @GET("article/list/{page}/json")
     suspend fun getArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
+    /**
+     * 获取项目分类
+     */
+    @GET("/project/tree/json")
+    suspend fun getProjectTree(): WanBaseListResponse<WanTopicResponse>
+
+    /**
+     * 获取公众号分类
+     */
+    @GET("/wxarticle/chapters/json")
+    suspend fun getOfficialAccountsTree(): WanBaseListResponse<WanTopicResponse>
+
+    /**
+     * 获取某个公众号的历史文章
+     */
+    @GET("/wxarticle/list/{id}/{page}/json")
+    suspend fun getBlogArticle(
+        @Path("id") id: Int,
+        @Path("page") page: Int,
+        @Query("k") keyword: String? = null
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

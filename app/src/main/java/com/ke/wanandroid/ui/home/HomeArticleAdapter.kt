@@ -1,34 +1,47 @@
 package com.ke.wanandroid.ui.home
 
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.bumptech.glide.RequestManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.ke.wanandroid.R
+import com.chad.library.adapter.base.module.LoadMoreModule
+import com.ke.mvvm.base.ui.BaseViewBindingAdapter
+import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.databinding.ItemArticleBinding
 
 class HomeArticleAdapter(private val requestManager: RequestManager) :
-    BaseQuickAdapter<WanArticleResponse, BaseViewHolder>(R.layout.item_article) {
-    override fun convert(holder: BaseViewHolder, item: WanArticleResponse) {
-        holder.apply {
-            setGone(R.id.is_new, !item.fresh)
-            setText(R.id.author, if(item.author.isNotEmpty()) item.author else item.shareUser)
-            if (item.tags.isNotEmpty()) {
-                setVisible(R.id.tag, true)
-                setText(R.id.tag, item.tags.first().name)
+    BaseViewBindingAdapter<WanArticleResponse, ItemArticleBinding>(), LoadMoreModule {
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        parent: ViewGroup
+    ): ItemArticleBinding {
+        return ItemArticleBinding.inflate(inflater, parent, false)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun convert(
+        holder: ViewBindingViewHolder<ItemArticleBinding>,
+        item: WanArticleResponse
+    ) {
+        holder.viewBinding.apply {
+            isNew.isVisible = item.fresh
+            author.text = if (item.author.isNotEmpty()) item.author else item.shareUser
+            tag.isVisible = item.tags.isNotEmpty()
+            tag.text = item.tags.firstOrNull()?.name
+            if (item.envelopePic.isEmpty()) {
+                image.isVisible = false
             } else {
-                setGone(R.id.tag, true)
+                image.isVisible = true
+                requestManager.load(item.envelopePic).into(image)
             }
-            if (item.envelopePic.isNotEmpty()) {
-                setVisible(R.id.image, true)
-                requestManager.load(item.envelopePic).into(getView(R.id.image))
-            } else {
-                setGone(R.id.image, true)
-            }
-            setText(R.id.title, item.title)
-            setGone(R.id.desc, item.desc.isEmpty())
-            setText(R.id.desc, item.desc)
-            setText(R.id.chapter, item.superChapterName + ":" + item.chapterName)
-            setText(R.id.time,item.niceShareDate)
+            title.text = item.title
+            desc.isVisible = item.desc.isNotEmpty()
+            desc.text = item.desc
+            chapter.text = item.superChapterName + ":" + item.chapterName
+            time.text = item.niceDate
         }
     }
+
 }

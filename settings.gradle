@@ -1,3 +1,5 @@
+include ':base'
+include ':module-officialAccount'
 include ':common'
 include ':api'
 include ':app'

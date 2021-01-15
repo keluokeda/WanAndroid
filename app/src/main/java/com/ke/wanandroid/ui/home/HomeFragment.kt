@@ -1,15 +1,13 @@
 package com.ke.wanandroid.ui.home
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.hi.dhl.binding.viewbind
+import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.wanandroid.R
-import com.ke.wanandroid.common.ui.BaseFragment
 import com.ke.wanandroid.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
