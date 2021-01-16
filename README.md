@@ -5,6 +5,7 @@
 ## 项目技术点
 - 使用MVVM架构
 - 使用Material Design设计语言
+- 使用ConstraintLayout减少布局嵌套
 - 使用viewBinding
 - 模块化，不同的功能分放在不同的模块内
 - 使用ARouter导航
