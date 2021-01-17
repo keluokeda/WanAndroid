@@ -59,7 +59,7 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
      * 加载数据
      * @param forceRefresh 强制刷新，会让View显示刷新指示器，当数据加载成功的时候，会清空之前的数据
      */
-    protected fun loadData(forceRefresh: Boolean = false) {
+    open protected fun loadData(forceRefresh: Boolean = false) {
         if (forceRefresh) {
             _isRefreshing.value = true
             index = startIndex

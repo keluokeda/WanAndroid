@@ -18,6 +18,6 @@ sealed class UserInfo {
     object NoLogin : UserInfo() {
     }
 
-    val defaultIconSrc = R.drawable.me_default_avatar
-    val defaultBackgroundSrc = R.drawable.me_header
+    val defaultIconSrc = R.drawable.mine_default_avatar
+    val defaultBackgroundSrc = R.drawable.mine_header
 }

@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/my_coin"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="我的积分"
                 app:drawableStartCompat="@drawable/mine_baseline_monetization_on_yellow_800_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/score_level"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="积分排行"
                 app:drawableStartCompat="@drawable/mine_baseline_timeline_pink_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
 
             <TextView
                 android:id="@+id/my_collection"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="我的收藏"
                 app:drawableStartCompat="@drawable/mine_baseline_stars_blue_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/later_read"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="稍后阅读"
                 app:drawableStartCompat="@drawable/mine_baseline_library_books_teal_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +117,7 @@
 
             <TextView
                 android:id="@+id/history"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="历史记录"
                 app:drawableStartCompat="@drawable/mine_baseline_history_cyan_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
 
             <TextView
                 android:id="@+id/about_author"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="关于作者"
                 app:drawableStartCompat="@drawable/mine_baseline_explore_green_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +135,7 @@
 
             <TextView
                 android:id="@+id/setting"
-                style="@style/me_action_style"
+                style="@style/mine_action_style"
                 android:text="系统设置"
                 app:drawableStartCompat="@drawable/mine_baseline_settings_deep_orange_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"

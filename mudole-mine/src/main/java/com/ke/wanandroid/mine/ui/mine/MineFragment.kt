@@ -39,6 +39,9 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             image.setOnClickListener {
                 viewModel.headerClicked()
             }
+            myCoin.setOnClickListener {
+                ARouter.getInstance().build(PagePath.MY_COIN).navigation()
+            }
         }
 
         viewModel.isRefreshing.observe(viewLifecycleOwner) {

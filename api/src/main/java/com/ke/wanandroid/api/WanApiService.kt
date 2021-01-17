@@ -86,7 +86,15 @@ interface WanApiService {
     /**
      * 获取用户积分
      */
-    suspend fun getUserCoin(): WanBaseResponse<Int>
+    @GET("/lg/coin/getcount/json")
+    suspend fun getUserCoinCount(): WanBaseResponse<Int>
+
+
+    /**
+     * 获取用户积分列表
+     */
+    @GET("/lg/coin/list/{page}/json")
+    suspend fun getCoinList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanCoinResponse>>
 
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
