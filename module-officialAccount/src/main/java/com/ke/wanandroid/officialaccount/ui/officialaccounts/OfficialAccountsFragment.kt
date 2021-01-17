@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.mvvm.base.ui.FragmentViewPager2Adapter
+import com.ke.wanandroid.common.const.PagePath
 
 
 import com.ke.wanandroid.officialaccount.R
@@ -36,6 +38,16 @@ class OfficialAccountsFragment :
             TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
                 tab.text = list[position].name
             }.attach()
+
+            binding.toolbar.setOnMenuItemClickListener {
+                if (it.itemId == R.id.action_search) {
+                    val id = list[binding.viewPager.currentItem].id
+                    ARouter.getInstance().build(PagePath.OFFICIAL_ACCOUNTS_SEARCH).withInt("id", id)
+                        .navigation()
+                }
+                return@setOnMenuItemClickListener true
+            }
         }
+
     }
 }

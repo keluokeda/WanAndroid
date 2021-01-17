@@ -1,3 +1,5 @@
+include ':mudole-mine'
+include ':module-system'
 include ':base'
 include ':module-officialAccount'
 include ':common'

@@ -2,6 +2,7 @@ package com.ke.wanandroid.officialaccount.ui.officialaccounts
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.mvvm.base.data.Result
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 class OfficialAccountsViewModel @ViewModelInject constructor(private val officialAccountsRepository: OfficialAccountsRepository) :
     BaseViewModel() {
 
-    private val _topicList = SingleLiveEvent<List<WanTopicResponse>>()
+    private val _topicList = MutableLiveData<List<WanTopicResponse>>()
 
     val topicList: LiveData<List<WanTopicResponse>>
         get() = _topicList

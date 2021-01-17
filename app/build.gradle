@@ -46,6 +46,8 @@ android {
 dependencies {
 
     implementation project(path: ':module-officialAccount')
+    implementation project(path: ':module-system')
+    implementation project(path: ':mudole-mine')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

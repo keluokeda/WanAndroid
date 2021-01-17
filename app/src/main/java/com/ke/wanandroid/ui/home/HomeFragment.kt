@@ -8,11 +8,12 @@ import com.bumptech.glide.Glide
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.wanandroid.R
+import com.ke.wanandroid.common.ui.BaseDataListFragment
 import com.ke.wanandroid.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseDataListFragment(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -22,8 +23,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = HomeArticleAdapter(Glide.with(this))
-        adapter.setOnItemClickListener { _, _, position ->  }
-        binding.recyclerView.adapter = adapter
+        adapter.setOnItemClickListener { _, _, position -> }
+//        binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
@@ -31,10 +32,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             )
         )
 
+        setup(
+            binding.swipeRefreshLayout,
+            homeViewModel,
+            adapter,
+            binding.recyclerView
+        )
 
-        homeViewModel.articleList.observe(viewLifecycleOwner) {
-            adapter.setNewInstance(it.toMutableList())
-        }
+
 //        binding.toolBar.menu.add(0, 0, 0, "搜索").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
     }
 }

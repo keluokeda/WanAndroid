@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ke.wanandroid.mine">
+
+    <application>
+        <activity android:name="com.ke.wanandroid.mine.ui.login.LoginRegisterActivity" />
+        <activity android:name=".ui.coin.MyCoinActivity" />
+    </application>
+
+</manifest>

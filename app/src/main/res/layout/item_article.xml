@@ -19,7 +19,7 @@
         android:paddingEnd="4dp"
         android:text="新"
         android:textColor="?attr/colorPrimary"
-        android:textSize="13sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/author"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/author"
@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/author"
-        style="@style/TextAppearance.MaterialComponents.Caption"
+        style="@style/ItemAuthorTextTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -47,7 +47,7 @@
         android:paddingEnd="3dp"
         android:paddingBottom="2dp"
         android:textColor="?attr/colorPrimary"
-        android:textSize="11sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/author"
         app:layout_constraintStart_toEndOf="@id/author"
         app:layout_constraintTop_toTopOf="@id/author"
@@ -55,7 +55,7 @@
 
     <TextView
         android:id="@+id/time"
-        style="@style/TextAppearance.MaterialComponents.Overline"
+        style="@style/ItemTimeTextTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="刚刚"
@@ -72,7 +72,7 @@
         android:paddingEnd="8dp"
         android:scaleType="centerCrop"
 
-        app:layout_constraintBottom_toTopOf="@id/chapter"
+        app:layout_constraintBottom_toTopOf="@id/action"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/author"
@@ -80,13 +80,12 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        style="@style/ItemTitleTextTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:maxLines="1"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/chapter"
+        app:layout_constraintBottom_toTopOf="@id/action"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/author"
@@ -100,7 +99,7 @@
         android:layout_height="wrap_content"
         android:maxLines="3"
         android:paddingTop="4dp"
-        app:layout_constraintBottom_toTopOf="@id/chapter"
+        app:layout_constraintBottom_toTopOf="@id/action"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/title"
@@ -108,14 +107,22 @@
 
     <TextView
         android:id="@+id/chapter"
-        style="@style/TextAppearance.MaterialComponents.Caption"
+        style="@style/ItemCategoryTextTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/action"
         tools:text="开源项目主Tab.未分类" />
+
+    <ImageView
+        android:id="@+id/action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:src="@drawable/baseline_more_horiz_grey_500_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

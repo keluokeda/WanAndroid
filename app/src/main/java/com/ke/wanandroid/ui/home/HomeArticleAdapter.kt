@@ -38,6 +38,7 @@ class HomeArticleAdapter(private val requestManager: RequestManager) :
             }
             title.text = item.title
             desc.isVisible = item.desc.isNotEmpty()
+            title.maxLines = if(item.desc.isNotEmpty()) 1 else 3
             desc.text = item.desc
             chapter.text = item.superChapterName + ":" + item.chapterName
             time.text = item.niceDate

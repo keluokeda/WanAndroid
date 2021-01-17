@@ -1,7 +1,7 @@
 package com.ke.mvvm.base.data
 
 
-abstract class BaseDataListRepository<T> {
+abstract class BaseDataListRepository<Params,R> {
 
-    abstract suspend fun getDataList(index:Int): Result<List<T>>
+    abstract suspend fun getDataList(index:Int,params: Params): Result<List<R>>
 }

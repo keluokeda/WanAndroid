@@ -9,23 +9,26 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 class ArticleListViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val articleListRepository: ArticleListRepository
-) : BaseDataListViewModel<WanArticleResponse>(
+) : BaseDataListViewModel<Pair<Int, String?>, WanArticleResponse>(
     articleListRepository
 ) {
 
+    private val id =
+        savedStateHandle.get<Int>("id") ?: throw RuntimeException("ArticleListViewModel 需要传入 id")
     var keyword: String? = null
         set(value) {
             field = value
-            articleListRepository.keyword = value
             loadData(true)
         }
 
     init {
-        articleListRepository.id = savedStateHandle.get<Int>("id") ?: 0
 
         keyword = null
 
     }
+
+    override val params: Pair<Int, String?>
+        get() = id to keyword
 
 
 }

@@ -62,6 +62,32 @@ interface WanApiService {
         @Query("k") keyword: String? = null
     ): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
+    /**
+     * 获取体系数据
+     */
+    @GET("/tree/json")
+    suspend fun getSystemList(): WanBaseListResponse<WanTopicResponse>
+
+    /**
+     * 获取体系文章列表
+     */
+    @GET("/article/list/{page}/json")
+    suspend fun getSystemArticleList(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
+    /**
+     * 获取用户信息
+     */
+    @GET("/lg/coin/userinfo/json")
+    suspend fun getUserInfo(): WanBaseResponse<WanUserInfoResponse>
+
+    /**
+     * 获取用户积分
+     */
+    suspend fun getUserCoin(): WanBaseResponse<Int>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

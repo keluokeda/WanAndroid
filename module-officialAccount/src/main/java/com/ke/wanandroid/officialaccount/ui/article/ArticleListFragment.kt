@@ -11,11 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hi.dhl.binding.viewbind
-import com.ke.mvvm.base.ui.BaseDataListFragment
 import com.ke.mvvm.base.ui.BaseViewBindingAdapter
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.log
+import com.ke.wanandroid.common.ui.BaseDataListFragment
 
 import com.ke.wanandroid.officialaccount.R
 import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentArticleListBinding
@@ -41,6 +41,8 @@ class ArticleListFragment : BaseDataListFragment(R.layout.official_accounts_frag
             ) {
                 holder.viewBinding.time.text = item.niceDate
                 holder.viewBinding.title.text = item.title
+                holder.viewBinding.author.text = item.author
+                holder.viewBinding.chapter.text = item.superChapterName + ":" + item.chapterName
             }
 
         }
@@ -52,7 +54,7 @@ class ArticleListFragment : BaseDataListFragment(R.layout.official_accounts_frag
         "$this onViewCreated".log()
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = adapter
+//        binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
@@ -60,8 +62,13 @@ class ArticleListFragment : BaseDataListFragment(R.layout.official_accounts_frag
             )
         )
 
+        adapter.addChildClickViewIds(R.id.action)
 
-        setup(binding.swipeRefreshLayout, viewModel, adapter)
+        adapter.setOnItemChildClickListener { _, _, position ->
+
+        }
+
+        setup(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
     }
 
@@ -84,7 +91,8 @@ class ArticleListFragment : BaseDataListFragment(R.layout.official_accounts_frag
     }
 
     fun setKeyWord(keyword: String?) {
-
+        viewModel.keyword = keyword
+        hideKeyboard()
     }
 
     companion object {

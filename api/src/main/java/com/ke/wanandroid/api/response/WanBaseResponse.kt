@@ -1,12 +1,25 @@
 package com.ke.wanandroid.api.response
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class WanBaseResponse<T : Parcelable>(
+
+data class WanBaseResponse<T>(
     val errorCode: Int,
     val errorMsg: String,
     val data: T?
-):Parcelable
+) {
+    @IgnoredOnParcel
+    val isSuccess: Boolean
+        get() {
+            return errorCode == ERROR_CODE_SUCCESS
+        }
+
+    fun requireData(): T = data!!
+
+    companion object {
+        const val ERROR_CODE_SUCCESS = 0
+    }
+}
 

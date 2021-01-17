@@ -17,6 +17,8 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/module-officialAccount" />
+            <option value="$PROJECT_DIR$/module-system" />
+            <option value="$PROJECT_DIR$/mudole-mine" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,11 +1,16 @@
 package com.ke.wanandroid.common.di
 
+import android.content.Context
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.common.log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,19 +21,17 @@ import javax.inject.Singleton
 @Module
 object WanApiServiceModule {
 
+
     @Provides
     @Singleton
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(@ApplicationContext context: Context): OkHttpClient {
         val httpLoggingInterceptor =
-            HttpLoggingInterceptor(logger = object : HttpLoggingInterceptor.Logger {
-                override fun log(message: String) {
-                    message.log()
-                }
-
-            }).apply {
+            HttpLoggingInterceptor { message -> message.log() }.apply {
                 level = HttpLoggingInterceptor.Level.HEADERS
             }
+
         return OkHttpClient.Builder()
+            .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context)))
             .addNetworkInterceptor(httpLoggingInterceptor)
             .build()
     }

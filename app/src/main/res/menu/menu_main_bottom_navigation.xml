@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/baseline_home_white_24dp"
+        android:title="首页"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_official_accounts"
+        android:icon="@drawable/baseline_people_outline_white_24dp"
+        android:title="公众号"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_system"
+        android:icon="@drawable/baseline_group_work_white_24dp"
+        android:title="体系"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_me"
+        android:icon="@drawable/baseline_account_circle_white_24dp"
+        android:title="我的"
+        app:showAsAction="always" />
+</menu>

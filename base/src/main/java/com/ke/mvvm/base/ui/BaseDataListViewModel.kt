@@ -7,11 +7,14 @@ import com.ke.mvvm.base.data.BaseDataListRepository
 
 import kotlinx.coroutines.launch
 
-abstract class BaseDataListViewModel<T>(private val baseDataListRepository: BaseDataListRepository<T>) :
+abstract class BaseDataListViewModel<Params, R>(private val baseDataListRepository: BaseDataListRepository<Params, R>) :
     BaseViewModel() {
     open val startIndex = 1
 
-    protected var index = startIndex
+    var index = 0
+
+
+    abstract val params:Params
 
     private val _isRefreshing = MutableLiveData<Boolean>()
 
@@ -22,12 +25,12 @@ abstract class BaseDataListViewModel<T>(private val baseDataListRepository: Base
         get() = _isRefreshing
 
 
-    private val _dataList = MutableLiveData<List<T>>()
+    private val _dataList = MutableLiveData<List<R>>()
 
     /**
      * 数据
      */
-    val dataList: LiveData<List<T>>
+    val dataList: LiveData<List<R>>
         get() = _dataList
 
     private val _loadDataResult = MutableLiveData<Int>()
@@ -41,6 +44,9 @@ abstract class BaseDataListViewModel<T>(private val baseDataListRepository: Base
     fun onLoadMore() {
         loadData()
     }
+
+
+
 
     /**
      * 刷新数据
@@ -61,11 +67,16 @@ abstract class BaseDataListViewModel<T>(private val baseDataListRepository: Base
         viewModelScope.launch {
 
             val result =
-                baseDataListRepository.getDataList(index)
+                baseDataListRepository.getDataList(index, params)
             when (result) {
                 is com.ke.mvvm.base.data.Result.Success -> {
+
+
                     val list = result.data
                     if (list.isEmpty()) {
+                        if (forceRefresh) {
+                            _dataList.value = emptyList()
+                        }
                         _loadDataResult.value = LOAD_DATA_RESULT_END
                     } else {
                         _dataList.value =

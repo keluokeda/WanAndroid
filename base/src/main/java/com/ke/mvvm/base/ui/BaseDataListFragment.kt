@@ -1,22 +1,38 @@
 package com.ke.mvvm.base.ui
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 
 abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
 
-    fun <T> setup(
+    abstract val emptyLayoutId: Int
+
+    open fun <T> setup(
         swipeRefreshLayout: SwipeRefreshLayout,
-        baseDataListViewModel: BaseDataListViewModel<T>,
-        adapter: BaseQuickAdapter<T, *>
+        baseDataListViewModel: BaseDataListViewModel<*,T>,
+        adapter: BaseQuickAdapter<T, *>, recyclerView: RecyclerView
     ) {
+        if (recyclerView.adapter != null) {
+            throw RuntimeException("请不要为Recycler设置apter，不然会在加载数据的时候显示空布局")
+        }
         baseDataListViewModel.dataList.observe(viewLifecycleOwner) {
+            if (recyclerView.adapter == null) {
+                recyclerView.adapter = adapter
+                adapter.setEmptyView(emptyLayoutId)
+            }
+
             adapter.setList(it)
         }
         baseDataListViewModel.isRefreshing.observe(viewLifecycleOwner) {
             swipeRefreshLayout.isRefreshing = it
         }
         baseDataListViewModel.loadDataResult.observe(viewLifecycleOwner) {
+            if (recyclerView.adapter == null) {
+                recyclerView.adapter = adapter
+                adapter.setEmptyView(emptyLayoutId)
+
+            }
             when (it) {
                 BaseDataListViewModel.LOAD_DATA_RESULT_SUCCESS -> {
                     adapter.loadMoreModule.loadMoreComplete()

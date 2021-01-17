@@ -7,6 +7,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WanTopicResponse(
+    @SerializedName("children")
+    val children:List<WanTopicResponse>,
     @SerializedName("courseId")
     val courseId: Int,
     @SerializedName("id")
