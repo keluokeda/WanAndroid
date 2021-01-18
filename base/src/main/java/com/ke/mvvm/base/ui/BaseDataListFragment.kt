@@ -1,5 +1,7 @@
 package com.ke.mvvm.base.ui
 
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -8,7 +10,7 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
 
     abstract val emptyLayoutId: Int
 
-    open fun <T> setup(
+    open fun <T> setupAdapter(
         swipeRefreshLayout: SwipeRefreshLayout,
         baseDataListViewModel: BaseDataListViewModel<*, T>,
         adapter: BaseQuickAdapter<T, *>, recyclerView: RecyclerView
@@ -54,6 +56,20 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
             baseDataListViewModel.onLoadMore()
         }
 
+    }
+
+    protected open fun setupRetry(
+        retryView: View,
+        contentView: View,
+        viewModel: BaseDataListViewModel<*, *>
+    ) {
+        retryView.setOnClickListener {
+            viewModel.retry()
+        }
+        viewModel.retryViewVisible.observe(viewLifecycleOwner) {
+            retryView.isVisible = it
+            contentView.isVisible = !it
+        }
     }
 }
 

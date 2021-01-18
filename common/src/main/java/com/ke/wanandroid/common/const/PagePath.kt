@@ -16,6 +16,10 @@ class PagePath private constructor() {
 
         const val H5_ARTICLE = "/h5/article"
 
-        const val H5_DEFAULT="/h5/default"
+        const val H5_DEFAULT = "/h5/default"
+
+        const val COIN_RANK = "/mine/coinRank"
+
+        const val USER_SHARED_ARTICLES = "/user/sharedArticles"
     }
 }

@@ -61,6 +61,8 @@ class ArticleListFragment :
         "$this onViewCreated".log()
         super.onViewCreated(view, savedInstanceState)
 
+        setupRetry(binding.retry, binding.recyclerView, viewModel)
+
 //        binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -75,7 +77,7 @@ class ArticleListFragment :
 
         }
 
-        setup(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
     }
 

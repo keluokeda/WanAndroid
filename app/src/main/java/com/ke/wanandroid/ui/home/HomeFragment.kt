@@ -1,7 +1,5 @@
 package com.ke.wanandroid.ui.home
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,13 +34,7 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
 
 
 
-        homeViewModel.retryViewVisible.observe(viewLifecycleOwner) {
-            binding.recyclerView.isVisible = !it
-            binding.retry.isVisible = it
-        }
-        binding.retry.setOnClickListener {
-            homeViewModel.retry()
-        }
+        setupRetry(binding.retry, binding.recyclerView, homeViewModel)
 
         homeViewModel.bannerData.observe(viewLifecycleOwner) {
             if (adapter.headerLayoutCount == 0) {
@@ -77,7 +69,7 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
                 DividerItemDecoration.VERTICAL
             )
         )
-        setup(
+        setupAdapter(
             binding.swipeRefreshLayout,
             homeViewModel,
             adapter,

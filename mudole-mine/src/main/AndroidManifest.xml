@@ -3,8 +3,10 @@
     package="com.ke.wanandroid.mine">
 
     <application>
-        <activity android:name="com.ke.wanandroid.mine.ui.login.LoginRegisterActivity" />
+        <activity android:name=".ui.coinrank.CoinRankActivity" />
+        <activity android:name=".ui.login.LoginRegisterActivity" />
         <activity android:name=".ui.coin.MyCoinActivity" />
+        <activity android:name=".ui.sharedartiles.UserSharedArticlesActivity" />
     </application>
 
 </manifest>

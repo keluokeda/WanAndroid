@@ -96,6 +96,21 @@ interface WanApiService {
     @GET("/lg/coin/list/{page}/json")
     suspend fun getCoinList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanCoinResponse>>
 
+    /**
+     * 获取积分列表
+     */
+    @GET("coin/rank/{page}/json")
+    suspend fun getCoinRank(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanUserInfoResponse>>
+
+    /**
+     * 获取用户分享的文章
+     */
+    @GET("/user/{userId}/share_articles/{page}/json")
+    suspend fun getUserSharedArticles(
+        @Path("userId") userId: Int,
+        @Path("page") page: Int
+    ): WanBaseResponse<WanUserArticleResponse>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

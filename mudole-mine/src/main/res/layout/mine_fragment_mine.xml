@@ -89,7 +89,7 @@
         
 
             <TextView
-                android:id="@+id/score_level"
+                android:id="@+id/coin_rank"
                 style="@style/mine_action_style"
                 android:text="积分排行"
                 app:drawableStartCompat="@drawable/mine_baseline_timeline_pink_500_24dp"
@@ -104,7 +104,7 @@
                 app:drawableStartCompat="@drawable/mine_baseline_stars_blue_500_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/score_level" />
+                app:layout_constraintTop_toBottomOf="@id/coin_rank" />
 
             <TextView
                 android:id="@+id/later_read"

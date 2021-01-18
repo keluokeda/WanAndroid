@@ -47,6 +47,12 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
         loadData()
     }
 
+    /**
+     * 重试
+     */
+    fun retry() {
+        loadData(true)
+    }
 
     /**
      * 刷新数据
@@ -60,8 +66,8 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
      * @param forceRefresh 强制刷新，会让View显示刷新指示器，当数据加载成功的时候，会清空之前的数据
      */
     protected open fun loadData(forceRefresh: Boolean = false) {
-        onLoadDataStart(forceRefresh)
         viewModelScope.launch {
+            onLoadDataStart(forceRefresh)
 
             val result =
                 baseDataListRepository.getDataList(index, params)
@@ -101,6 +107,9 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
      */
     protected open fun onLoadDataError(exception: Exception) {
         _loadDataResult.value = LOAD_DATA_RESULT_ERROR
+        if (_dataList.value == null) {
+            _retryViewVisible.value = true
+        }
     }
 
     /**
@@ -111,6 +120,8 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
             _isRefreshing.value = true
             index = startIndex
         }
+        _retryViewVisible.value = false
+
     }
 
 

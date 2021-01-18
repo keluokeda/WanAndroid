@@ -34,9 +34,7 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
-    fun retry(){
-        loadData(true)
-    }
+
     override fun loadData(forceRefresh: Boolean) {
         super.loadData(forceRefresh)
         viewModelScope.launch {
@@ -47,16 +45,11 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    override fun onLoadDataStart(forceRefresh: Boolean) {
-        super.onLoadDataStart(forceRefresh)
-        _retryViewVisible.value = false
-    }
+
 
     override fun onLoadDataError(exception: Exception) {
         super.onLoadDataError(exception)
-        if (_dataList.value == null) {
-            _retryViewVisible.value = true
-        }
+
     }
 
 }

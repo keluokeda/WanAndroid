@@ -42,6 +42,11 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             myCoin.setOnClickListener {
                 ARouter.getInstance().build(PagePath.MY_COIN).navigation()
             }
+            coinRank.setOnClickListener {
+                ARouter.getInstance().build(PagePath.COIN_RANK).navigation()
+
+            }
+
         }
 
         viewModel.isRefreshing.observe(viewLifecycleOwner) {

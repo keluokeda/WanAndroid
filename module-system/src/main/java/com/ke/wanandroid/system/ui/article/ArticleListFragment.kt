@@ -21,7 +21,7 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        val adapter = ArticleListAdapter()
-        setup(
+        setupAdapter(
             binding.swipeRefreshLayout,
             viewModel,
             adapter,
