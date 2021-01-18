@@ -3,49 +3,56 @@ package com.ke.wanandroid.officialaccount.ui.article
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hi.dhl.binding.viewbind
-import com.ke.mvvm.base.ui.BaseViewBindingAdapter
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.log
-import com.ke.wanandroid.common.ui.BaseDataListFragment
-
+import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.officialaccount.R
 import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentArticleListBinding
-import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsItemArticleBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ArticleListFragment : BaseDataListFragment(R.layout.official_accounts_fragment_article_list) {
+class ArticleListFragment :
+    BaseArticleListFragment(R.layout.official_accounts_fragment_article_list) {
 
-    private val adapter =
-        object : BaseViewBindingAdapter<WanArticleResponse, OfficialAccountsItemArticleBinding>(),
-            LoadMoreModule {
-            override fun createViewBinding(
-                inflater: LayoutInflater,
-                parent: ViewGroup
-            ): OfficialAccountsItemArticleBinding {
-                return OfficialAccountsItemArticleBinding.inflate(inflater, parent, false)
-            }
+//    private val adapter =
+//        object : BaseViewBindingAdapter<WanArticleResponse, OfficialAccountsItemArticleBinding>(),
+//            LoadMoreModule {
+//            override fun createViewBinding(
+//                inflater: LayoutInflater,
+//                parent: ViewGroup
+//            ): OfficialAccountsItemArticleBinding {
+//                return OfficialAccountsItemArticleBinding.inflate(inflater, parent, false)
+//            }
+//
+//            override fun convert(
+//                holder: ViewBindingViewHolder<OfficialAccountsItemArticleBinding>,
+//                item: WanArticleResponse
+//            ) {
+//                holder.viewBinding.time.text = item.niceDate
+//                holder.viewBinding.title.text = item.title
+//                holder.viewBinding.author.text = item.author
+//                holder.viewBinding.chapter.text = item.superChapterName + ":" + item.chapterName
+//            }
+//
+//        }
 
-            override fun convert(
-                holder: ViewBindingViewHolder<OfficialAccountsItemArticleBinding>,
-                item: WanArticleResponse
-            ) {
-                holder.viewBinding.time.text = item.niceDate
-                holder.viewBinding.title.text = item.title
-                holder.viewBinding.author.text = item.author
-                holder.viewBinding.chapter.text = item.superChapterName + ":" + item.chapterName
-            }
 
-        }
+    override fun bindData(
+        holder: ViewBindingViewHolder<ItemArticleBinding>,
+        item: WanArticleResponse
+    ) {
+        super.bindData(holder, item)
+        holder.viewBinding.isNew.isVisible = false
+        holder.viewBinding.tag.isVisible = false
+    }
 
     private val binding: OfficialAccountsFragmentArticleListBinding by viewbind()
     private val viewModel: ArticleListViewModel by viewModels()

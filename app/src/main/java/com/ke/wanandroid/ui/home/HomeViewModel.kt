@@ -10,6 +10,7 @@ import com.ke.wanandroid.api.response.WanBannerResponse
 import kotlinx.coroutines.launch
 import com.ke.mvvm.base.data.Result
 import com.ke.mvvm.base.ui.BaseDataListViewModel
+import java.lang.Exception
 
 
 class HomeViewModel @ViewModelInject constructor(
@@ -29,15 +30,33 @@ class HomeViewModel @ViewModelInject constructor(
 
 
     init {
+        loadData(true)
+    }
+
+
+    fun retry(){
+        loadData(true)
+    }
+    override fun loadData(forceRefresh: Boolean) {
+        super.loadData(forceRefresh)
         viewModelScope.launch {
             val result = homeRepository.getBannerData()
             if (result is Result.Success) {
                 _bannerData.value = result.data.data
             }
         }
-
-        loadData(true)
     }
 
+    override fun onLoadDataStart(forceRefresh: Boolean) {
+        super.onLoadDataStart(forceRefresh)
+        _retryViewVisible.value = false
+    }
+
+    override fun onLoadDataError(exception: Exception) {
+        super.onLoadDataError(exception)
+        if (_dataList.value == null) {
+            _retryViewVisible.value = true
+        }
+    }
 
 }

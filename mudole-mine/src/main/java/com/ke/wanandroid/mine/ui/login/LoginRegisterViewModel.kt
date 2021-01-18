@@ -20,10 +20,7 @@ class LoginRegisterViewModel @ViewModelInject constructor(
 ) :
     BaseViewModel() {
 
-    private val _loadingViewVisible = MutableLiveData<Boolean>()
 
-    val loadingViewVisible: LiveData<Boolean>
-        get() = _loadingViewVisible
 
     private val _loginResult = SingleLiveEvent<Boolean>()
 

@@ -65,4 +65,8 @@ dependencies {
     api 'jp.wasabeef:glide-transformations:4.3.0'
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     api 'com.github.keluokeda:RxImagePicker:1.0.1'
+
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 }

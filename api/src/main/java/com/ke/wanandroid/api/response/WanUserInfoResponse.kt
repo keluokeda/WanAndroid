@@ -14,5 +14,7 @@ data class WanUserInfoResponse(
     @SerializedName("userId")
     val userId: Int,
     @SerializedName("username")
-    val username: String
+    val username: String,
+    @SerializedName("level")
+    val level:Int
 ):Parcelable

@@ -23,9 +23,14 @@ interface UserDataStore {
     var coinCount: Int
 
     /**
-     * 排名
+     * 等级
      */
     var level: Int
+
+    /**
+     * 排名
+     */
+    var rank: Int
 
     /**
      * 用户id
@@ -73,12 +78,13 @@ class UserDataStoreImpl @Inject constructor(@ApplicationContext private val appl
             }
         }
     override var level: Int
-        get() = sharedPreferences.getInt(KEY_RANK, 0)
+        get() = sharedPreferences.getInt(KEY_LEVEL, 0)
         set(value) {
             sharedPreferences.edit {
-                putInt(KEY_RANK, value)
+                putInt(KEY_LEVEL, value)
             }
         }
+
     override var userId: Int
         get() = sharedPreferences.getInt(KEY_USER_ID, 0)
         set(value) {
@@ -103,14 +109,24 @@ class UserDataStoreImpl @Inject constructor(@ApplicationContext private val appl
         }
     }
 
+    override var rank: Int
+        get() = sharedPreferences.getInt(KEY_RANK, 0)
+        set(value) {
+            sharedPreferences.edit {
+                putInt(KEY_RANK, value)
+            }
+        }
+
     companion object {
         private const val KEY_IS_LOGIN = "KEY_IS_LOGIN"
         private const val KEY_USERNAME = "KEY_USERNAME"
         private const val KEY_COIN_COUNT = "KEY_COIN_COUNT"
+        private const val KEY_LEVEL = "KEY_LEVEL"
         private const val KEY_RANK = "KEY_RANK"
         private const val KEY_USER_ID = "KEY_USER_ID"
         private const val KEY_USER_ICON_IMAGE_PATH = "KEY_USER_ICON_IMAGE_PATH"
-        private const val KEY_ME_HEADER_BACKGROUND_IMAGE_PATH = "KEY_ME_HEADER_BACKGROUND_IMAGE_PATH"
+        private const val KEY_ME_HEADER_BACKGROUND_IMAGE_PATH =
+            "KEY_ME_HEADER_BACKGROUND_IMAGE_PATH"
     }
 
 }

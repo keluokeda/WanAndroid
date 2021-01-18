@@ -10,7 +10,7 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
 
     open fun <T> setup(
         swipeRefreshLayout: SwipeRefreshLayout,
-        baseDataListViewModel: BaseDataListViewModel<*,T>,
+        baseDataListViewModel: BaseDataListViewModel<*, T>,
         adapter: BaseQuickAdapter<T, *>, recyclerView: RecyclerView
     ) {
         if (recyclerView.adapter != null) {
@@ -28,11 +28,11 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
             swipeRefreshLayout.isRefreshing = it
         }
         baseDataListViewModel.loadDataResult.observe(viewLifecycleOwner) {
-            if (recyclerView.adapter == null) {
-                recyclerView.adapter = adapter
-                adapter.setEmptyView(emptyLayoutId)
-
-            }
+//            if (recyclerView.adapter == null) {
+//                recyclerView.adapter = adapter
+//                adapter.setEmptyView(emptyLayoutId)
+//
+//            }
             when (it) {
                 BaseDataListViewModel.LOAD_DATA_RESULT_SUCCESS -> {
                     adapter.loadMoreModule.loadMoreComplete()
@@ -40,8 +40,8 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
                 BaseDataListViewModel.LOAD_DATA_RESULT_END -> {
                     adapter.loadMoreModule.loadMoreEnd()
                 }
-                else -> {
-                    adapter.loadMoreModule.loadMoreEnd()
+                BaseDataListViewModel.LOAD_DATA_RESULT_ERROR -> {
+                    adapter.loadMoreModule.loadMoreFail()
                 }
             }
         }
@@ -49,6 +49,7 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
             baseDataListViewModel.refresh()
         }
 
+        //点击重试会回调这个方法
         adapter.loadMoreModule.setOnLoadMoreListener {
             baseDataListViewModel.onLoadMore()
         }

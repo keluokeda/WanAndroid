@@ -33,6 +33,7 @@ class MineRepository @Inject constructor(
                 userDataStore.level,
                 userDataStore.username!!,
                 userDataStore.userId,
+                userDataStore.rank,
                 userDataStore.userIconImagePath,
                 userDataStore.meHeaderBackgroundImagePath
             )
@@ -46,13 +47,14 @@ class MineRepository @Inject constructor(
      */
     fun saveUserInfoToLocal(wanUserInfoResponse: WanUserInfoResponse) {
         userDataStore.coinCount = wanUserInfoResponse.coinCount
-        userDataStore.level = wanUserInfoResponse.rank.toInt()
+        userDataStore.level = wanUserInfoResponse.level
         userDataStore.username = wanUserInfoResponse.username
         userDataStore.userId = wanUserInfoResponse.userId
+        userDataStore.rank = wanUserInfoResponse.rank.toInt()
     }
 
-    fun setUserIconImagePath(uri: String) {
-        userDataStore.userIconImagePath = uri
+    fun setUserIconImagePath(path: String) {
+        userDataStore.userIconImagePath = path
     }
 
     fun setMeHeaderBackgroundImagePath(path: String) {

@@ -2,18 +2,17 @@ package com.ke.wanandroid.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.bumptech.glide.Glide
 import com.hi.dhl.binding.viewbind
-import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.wanandroid.R
-import com.ke.wanandroid.common.ui.BaseDataListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseDataListFragment(R.layout.fragment_home) {
+class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -22,16 +21,31 @@ class HomeFragment : BaseDataListFragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = HomeArticleAdapter(Glide.with(this))
+
+
+
+        homeViewModel.retryViewVisible.observe(viewLifecycleOwner) {
+            binding.recyclerView.isVisible = !it
+            binding.retry.isVisible = it
+        }
+        binding.retry.setOnClickListener {
+            homeViewModel.retry()
+        }
+//        val adapter = HomeArticleAdapter(Glide.with(this))
         adapter.setOnItemClickListener { _, _, position -> }
-//        binding.recyclerView.adapter = adapter
+
+        homeViewModel.bannerData.observe(viewLifecycleOwner) {
+            if (adapter.headerLayoutCount == 0) {
+
+
+            }
+        }
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
                 DividerItemDecoration.VERTICAL
             )
         )
-
         setup(
             binding.swipeRefreshLayout,
             homeViewModel,

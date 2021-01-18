@@ -12,10 +12,7 @@ import kotlinx.coroutines.launch
 class SystemViewModel @ViewModelInject constructor(private val systemRepository: SystemRepository) :
     BaseViewModel() {
 
-    private val _loadingViewVisible = MutableLiveData<Boolean>()
 
-    val loadingViewVisible: LiveData<Boolean>
-        get() = _loadingViewVisible
 
     private val _topicList = MutableLiveData<List<WanTopicResponse>>()
 

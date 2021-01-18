@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/is_new"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="4dp"
+        android:text="新"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/author"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/author"
+        tools:text="新" />
+
+    <TextView
+        android:id="@+id/author"
+        style="@style/ItemAuthorTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintStart_toEndOf="@id/is_new"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="弘扬" />
+
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_article_tag"
+        android:paddingStart="3dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="3dp"
+        android:paddingBottom="2dp"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/author"
+        app:layout_constraintStart_toEndOf="@id/author"
+        app:layout_constraintTop_toTopOf="@id/author"
+        tools:text="项目" />
+
+    <TextView
+        android:id="@+id/time"
+        style="@style/ItemTimeTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="刚刚"
+        app:layout_constraintBottom_toBottomOf="@id/author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/author" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="140dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="8dp"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintBottom_toTopOf="@id/action"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/ItemTitleTextTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="手把手教你自定义Gradle插件" />
+
+    <TextView
+        android:id="@+id/desc"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:paddingTop="4dp"
+        app:layout_constraintBottom_toTopOf="@id/action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@string/test_desc" />
+
+    <TextView
+        android:id="@+id/chapter"
+        style="@style/ItemCategoryTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/action"
+        tools:text="开源项目主Tab.未分类" />
+
+    <ImageView
+        android:id="@+id/action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:src="@drawable/baseline_more_horiz_grey_500_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

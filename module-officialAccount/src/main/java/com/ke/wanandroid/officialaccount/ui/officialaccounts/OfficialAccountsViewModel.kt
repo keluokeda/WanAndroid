@@ -20,14 +20,24 @@ class OfficialAccountsViewModel @ViewModelInject constructor(private val officia
         get() = _topicList
 
     init {
+        loadData()
+    }
+
+    fun loadData() {
         viewModelScope.launch {
+            _loadingViewVisible.value = true
+            _retryViewVisible.value = false
+            _contentViewVisible.value = false
             val result = officialAccountsRepository.getTopicList()
+            _loadingViewVisible.value = false
             when (result) {
                 is Result.Success -> {
+                    _contentViewVisible.value = true
                     _topicList.value = result.data.data
                 }
                 is Result.Error -> {
-
+                    _contentViewVisible.value = false
+                    _retryViewVisible.value = true
                 }
             }
         }

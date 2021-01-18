@@ -8,10 +8,11 @@ sealed class UserInfo {
         val level: Int,
         val username: String,
         val userId: Int,
+        val rank: Int,
         val iconImagePath: String?,
         val backgroundImagePath: String?
     ) : UserInfo() {
-        val levelMessage = "等级:$level 排名:${level}"
+        val levelMessage = "等级:$level 排名:${rank}"
         val userIdMessage = "ID:$userId"
     }
 

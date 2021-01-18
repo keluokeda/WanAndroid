@@ -2,6 +2,7 @@ package com.ke.wanandroid.system.ui.system
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexDirection
@@ -23,12 +24,18 @@ class SystemFragment : BaseFragment(R.layout.system_fragment_system) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = FlexboxLayoutManager(requireContext(),FlexDirection.ROW)
+        val layoutManager = FlexboxLayoutManager(requireContext(), FlexDirection.ROW)
 
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.addItemDecoration(FlexboxItemDecoration(requireContext()).apply {
-            setDrawable(requireActivity().getDrawable(R.drawable.divider_empty_margin_small))
-            setOrientation(FlexboxItemDecoration.VERTICAL)        })
+            setDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.divider_empty_margin_small
+                )
+            )
+            setOrientation(FlexboxItemDecoration.VERTICAL)
+        })
 
         viewModel.loadingViewVisible.observe(viewLifecycleOwner) {
             binding.loadingView.isVisible = it

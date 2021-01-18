@@ -1,8 +1,9 @@
 package com.ke.wanandroid.officialaccount.ui.officialaccounts
 
+
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -10,8 +11,6 @@ import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.mvvm.base.ui.FragmentViewPager2Adapter
 import com.ke.wanandroid.common.const.PagePath
-
-
 import com.ke.wanandroid.officialaccount.R
 import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentOfficialAccountsBinding
 import com.ke.wanandroid.officialaccount.ui.article.ArticleListFragment
@@ -26,6 +25,25 @@ class OfficialAccountsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        viewModel.loadingViewVisible.observe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
+
+        }
+
+        viewModel.contentViewVisible.observe(viewLifecycleOwner) {
+            binding.tabLayout.isVisible = it
+            binding.viewPager.isVisible = it
+        }
+
+        viewModel.retryViewVisible.observe(viewLifecycleOwner) {
+            binding.retry.isVisible = it
+        }
+
+        binding.retry.setOnClickListener {
+            viewModel.loadData()
+        }
 
         viewModel.topicList.observe(viewLifecycleOwner) { list ->
             binding.viewPager.adapter =

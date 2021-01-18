@@ -65,4 +65,6 @@ dependencies {
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation 'com.youth.banner:banner:2.1.0'
 }
