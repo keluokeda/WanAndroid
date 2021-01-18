@@ -2,16 +2,23 @@ package com.ke.wanandroid.common.ui
 
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.const.ExtraKey
+import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 
 abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(layoutId) {
 
     protected val adapter by lazy {
         ArticleListAdapter(::bindData).apply {
+            setOnItemClickListener { _, view, position ->
 
+                ARouter.getInstance().build(PagePath.H5_ARTICLE)
+                    .withParcelable(ExtraKey.ARTICLE, getItem(position)).navigation()
+            }
         }
     }
 

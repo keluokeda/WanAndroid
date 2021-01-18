@@ -3,7 +3,8 @@
     package="com.ke.wanandroid.h5">
 
     <application>
-        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".ArticleWebViewActivity" />
+        <activity android:name=".DefaultWebViewActivity" />
     </application>
 
 </manifest>

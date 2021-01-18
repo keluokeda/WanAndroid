@@ -13,5 +13,9 @@ class PagePath private constructor() {
         const val LOGIN = "/mine/login"
 
         const val MY_COIN = "/mine/coin"
+
+        const val H5_ARTICLE = "/h5/article"
+
+        const val H5_DEFAULT="/h5/default"
     }
 }

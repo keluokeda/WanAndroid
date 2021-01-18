@@ -8,10 +8,13 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.R
 import com.ke.wanandroid.api.response.WanBannerResponse
+import com.ke.wanandroid.common.const.ExtraKey
+import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.databinding.FragmentHomeBinding
 import com.ke.wanandroid.databinding.LayoutBannerBinding
@@ -40,8 +43,6 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
         binding.retry.setOnClickListener {
             homeViewModel.retry()
         }
-//        val adapter = HomeArticleAdapter(Glide.with(this))
-        adapter.setOnItemClickListener { _, _, position -> }
 
         homeViewModel.bannerData.observe(viewLifecycleOwner) {
             if (adapter.headerLayoutCount == 0) {
@@ -62,9 +63,9 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
                     .addBannerLifecycleObserver(this)
                     .setIndicator(CircleIndicator(requireContext()))
                     .setOnBannerListener { _, position ->
-                        val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse(it[position].url)
-                        startActivity(intent)
+                        ARouter.getInstance().build(PagePath.H5_DEFAULT)
+                            .withString(ExtraKey.URL, it[position].url)
+                            .navigation()
                     }
 
                 adapter.addHeaderView(header.root)
