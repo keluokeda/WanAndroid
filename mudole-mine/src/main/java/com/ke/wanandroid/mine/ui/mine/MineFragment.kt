@@ -46,6 +46,9 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
                 ARouter.getInstance().build(PagePath.COIN_RANK).navigation()
 
             }
+            myCollection.setOnClickListener {
+                ARouter.getInstance().build(PagePath.MY_COLLECTIONS).navigation()
+            }
 
         }
 

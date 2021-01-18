@@ -27,12 +27,7 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
             adapter,
             binding.recyclerView
         )
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
+
         binding.toolbar.title =
             requireArguments().getParcelable<WanTopicResponse>(ArticleListActivity.EXTRA_TOPIC)!!.name
 

@@ -18,6 +18,11 @@ class SplashActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_splash)
 //        startActivity(Intent(this, MainActivity::class.java))
         ARouter.getInstance().build(PagePath.MAIN).navigation()
+//        finish()
+    }
+
+    override fun onStop() {
+        super.onStop()
         finish()
     }
 }

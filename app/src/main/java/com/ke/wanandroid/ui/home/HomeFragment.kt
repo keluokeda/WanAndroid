@@ -63,12 +63,7 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
                 adapter.addHeaderView(header.root)
             }
         }
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
+
         setupAdapter(
             binding.swipeRefreshLayout,
             homeViewModel,

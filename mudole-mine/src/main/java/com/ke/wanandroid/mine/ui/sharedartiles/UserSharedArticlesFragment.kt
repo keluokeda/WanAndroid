@@ -24,12 +24,7 @@ class UserSharedArticlesFragment :
 
         setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
+
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }

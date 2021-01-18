@@ -9,7 +9,6 @@ class PagePath private constructor() {
 
         const val SYSTEM_ARTICLE_LIST = "/system/article"
 
-
         const val LOGIN = "/mine/login"
 
         const val MY_COIN = "/mine/coin"
@@ -21,5 +20,7 @@ class PagePath private constructor() {
         const val COIN_RANK = "/mine/coinRank"
 
         const val USER_SHARED_ARTICLES = "/user/sharedArticles"
+
+        const val MY_COLLECTIONS = "/mine/collections"
     }
 }

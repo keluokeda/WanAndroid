@@ -2,6 +2,7 @@ package com.ke.mvvm.base.ui
 
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -18,6 +19,7 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
         if (recyclerView.adapter != null) {
             throw RuntimeException("请不要为Recycler设置apter，不然会在加载数据的时候显示空布局")
         }
+
         baseDataListViewModel.dataList.observe(viewLifecycleOwner) {
             if (recyclerView.adapter == null) {
                 recyclerView.adapter = adapter

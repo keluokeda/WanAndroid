@@ -2,8 +2,13 @@ package com.ke.wanandroid.common.ui
 
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.ke.mvvm.base.ui.BaseDataListViewModel
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.const.ExtraKey
@@ -30,8 +35,8 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
         holder.viewBinding.apply {
             isNew.isVisible = item.fresh
             author.text = if (item.author.isNotEmpty()) item.author else item.shareUser
-            tag.isVisible = item.tags.isNotEmpty()
-            tag.text = item.tags.firstOrNull()?.name
+            tag.isVisible = item.tags?.isNotEmpty() ?: false
+            tag.text = item.tags?.firstOrNull()?.name
             if (item.envelopePic.isEmpty()) {
                 image.isVisible = false
             } else {
@@ -45,5 +50,20 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
             chapter.text = item.superChapterName + ":" + item.chapterName
             time.text = item.niceDate
         }
+    }
+
+    override fun <T> setupAdapter(
+        swipeRefreshLayout: SwipeRefreshLayout,
+        baseDataListViewModel: BaseDataListViewModel<*, T>,
+        adapter: BaseQuickAdapter<T, *>,
+        recyclerView: RecyclerView
+    ) {
+        super.setupAdapter(swipeRefreshLayout, baseDataListViewModel, adapter, recyclerView)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 }

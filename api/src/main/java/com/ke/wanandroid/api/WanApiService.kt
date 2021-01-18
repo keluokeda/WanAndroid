@@ -111,6 +111,14 @@ interface WanApiService {
         @Path("page") page: Int
     ): WanBaseResponse<WanUserArticleResponse>
 
+    /**
+     * 获取用户收藏的文章
+     */
+    @GET("/lg/collect/list/{page}/json")
+    suspend fun getUserCollectionArticles(
+        @Path("page") page: Int
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

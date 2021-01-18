@@ -7,6 +7,7 @@
         <activity android:name=".ui.login.LoginRegisterActivity" />
         <activity android:name=".ui.coin.MyCoinActivity" />
         <activity android:name=".ui.sharedartiles.UserSharedArticlesActivity" />
+        <activity android:name=".ui.collections.MyCollectionsActivity" />
     </application>
 
 </manifest>

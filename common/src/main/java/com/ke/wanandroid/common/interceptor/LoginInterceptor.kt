@@ -12,6 +12,10 @@ import com.ke.wanandroid.common.data.UserDataStore
 
 @Interceptor(priority = 9, name = "登录拦截器")
 class LoginInterceptor : IInterceptor {
+    private val list = listOf(
+        PagePath.MY_COIN,
+        PagePath.MY_COLLECTIONS
+    )
 
     lateinit var userDataStore: UserDataStore
 
@@ -37,8 +41,6 @@ class LoginInterceptor : IInterceptor {
         if (userDataStore.isLogin) {
             return false
         }
-        return postcard.path in listOf(
-            PagePath.MY_COIN
-        )
+        return postcard.path in list
     }
 }
