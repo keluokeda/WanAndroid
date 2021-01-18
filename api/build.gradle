@@ -8,12 +8,12 @@ plugins {
 group = 'com.github.keluokeda'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    compileSdkVersion compile_version
+    buildToolsVersion build_version
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion target_version
         versionCode 1
         versionName "1.0"
 

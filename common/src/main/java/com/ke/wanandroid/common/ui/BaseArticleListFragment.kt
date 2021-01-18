@@ -10,7 +10,9 @@ import com.ke.wanandroid.common.databinding.ItemArticleBinding
 abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(layoutId) {
 
     protected val adapter by lazy {
-        ArticleListAdapter(::bindData)
+        ArticleListAdapter(::bindData).apply {
+
+        }
     }
 
     @CallSuper

@@ -15,6 +15,9 @@ buildscript {
         fragment_version = "1.2.5"
         glide_version = "4.11.0"
         data_store_version = "1.0.0-alpha05"
+        compile_version = 30
+        build_version = "30.0.2"
+        target_version = 30
     }
     repositories {
         google()

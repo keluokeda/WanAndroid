@@ -1,3 +1,4 @@
+include ':module-h5'
 include ':mudole-mine'
 include ':module-system'
 include ':base'
