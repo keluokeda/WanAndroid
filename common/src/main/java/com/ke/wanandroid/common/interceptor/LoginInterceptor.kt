@@ -14,7 +14,8 @@ import com.ke.wanandroid.common.data.UserDataStore
 class LoginInterceptor : IInterceptor {
     private val list = listOf(
         PagePath.MY_COIN,
-        PagePath.MY_COLLECTIONS
+        PagePath.MY_COLLECTIONS,
+        PagePath.MY_SHARE_ARTICLES
     )
 
     lateinit var userDataStore: UserDataStore

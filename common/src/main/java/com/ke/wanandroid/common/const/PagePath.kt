@@ -22,5 +22,9 @@ class PagePath private constructor() {
         const val USER_SHARED_ARTICLES = "/user/sharedArticles"
 
         const val MY_COLLECTIONS = "/mine/collections"
+
+        const val MY_SHARE_ARTICLES = "/mine/shareArticles"
+
+        const val SHARE_ARTICLE="/mine/shareArticle"
     }
 }

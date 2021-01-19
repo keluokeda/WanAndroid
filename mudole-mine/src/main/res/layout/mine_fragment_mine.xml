@@ -1,147 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.mine.MineFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/mine_header"
-                app:layout_constraintDimensionRatio="16:12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mine_header"
+            app:layout_constraintDimensionRatio="16:12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:src="@drawable/mine_default_avatar"
-                app:civ_border_color="@android:color/holo_orange_dark"
-                app:civ_border_width="1dp"
-                app:layout_constraintBottom_toBottomOf="@id/image"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@id/image"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toTopOf="@id/image"
-                app:layout_constraintVertical_bias="0.40"
-                app:layout_constraintWidth_percent="0.25" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/mine_default_avatar"
+            app:civ_border_color="@android:color/holo_orange_dark"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/image"
+            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image"
+            app:layout_constraintVertical_bias="0.40"
+            app:layout_constraintWidth_percent="0.25" />
 
-            <TextView
-                android:id="@+id/name"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="@id/avatar"
-                app:layout_constraintStart_toStartOf="@id/avatar"
-                app:layout_constraintTop_toBottomOf="@id/avatar"
-                tools:text="913918146" />
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@id/avatar"
+            app:layout_constraintStart_toStartOf="@id/avatar"
+            app:layout_constraintTop_toBottomOf="@id/avatar"
+            tools:text="913918146" />
 
-            <TextView
-                android:id="@+id/uid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@id/name"
-                app:layout_constraintStart_toStartOf="@id/name"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                tools:text="ID:123456" />
+        <TextView
+            android:id="@+id/uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/name"
+            app:layout_constraintStart_toStartOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="ID:123456" />
 
-            <TextView
-                android:id="@+id/level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@id/uid"
-                app:layout_constraintStart_toStartOf="@id/uid"
-                app:layout_constraintTop_toBottomOf="@id/uid"
-                tools:text="等级:1 排名:100" />
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/uid"
+            app:layout_constraintStart_toStartOf="@id/uid"
+            app:layout_constraintTop_toBottomOf="@id/uid"
+            tools:text="等级:1 排名:100" />
 
-            <TextView
-                android:id="@+id/my_coin"
-                style="@style/mine_action_style"
-                android:text="我的积分"
-                app:drawableStartCompat="@drawable/mine_baseline_monetization_on_yellow_800_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image" />
+        <TextView
+            android:id="@+id/my_coin"
+            style="@style/mine_action_style"
+            android:text="我的积分"
+            app:drawableStartCompat="@drawable/mine_baseline_monetization_on_yellow_800_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-        
 
-            <TextView
-                android:id="@+id/coin_rank"
-                style="@style/mine_action_style"
-                android:text="积分排行"
-                app:drawableStartCompat="@drawable/mine_baseline_timeline_pink_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_coin" />
+        <TextView
+            android:id="@+id/coin_rank"
+            style="@style/mine_action_style"
+            android:text="积分排行"
+            app:drawableStartCompat="@drawable/mine_baseline_timeline_pink_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_coin" />
 
-            <TextView
-                android:id="@+id/my_collection"
-                style="@style/mine_action_style"
-                android:text="我的收藏"
-                app:drawableStartCompat="@drawable/mine_baseline_stars_blue_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/coin_rank" />
+        <TextView
+            android:id="@+id/my_collection"
+            style="@style/mine_action_style"
+            android:text="我的收藏"
+            app:drawableStartCompat="@drawable/mine_baseline_stars_blue_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/coin_rank" />
 
-            <TextView
-                android:id="@+id/later_read"
-                style="@style/mine_action_style"
-                android:text="稍后阅读"
-                app:drawableStartCompat="@drawable/mine_baseline_library_books_teal_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_collection" />
+        <TextView
+            android:id="@+id/my_share"
+            style="@style/mine_action_style"
+            android:text="我的分享"
+            app:drawableStartCompat="@drawable/mine_baseline_share_indigo_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_collection" />
 
-            <TextView
-                android:id="@+id/history"
-                style="@style/mine_action_style"
-                android:text="历史记录"
-                app:drawableStartCompat="@drawable/mine_baseline_history_cyan_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/later_read" />
+        <TextView
+            android:id="@+id/later_read"
+            style="@style/mine_action_style"
+            android:text="稍后阅读"
+            app:drawableStartCompat="@drawable/mine_baseline_library_books_teal_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_share" />
 
-            <TextView
-                android:id="@+id/about_author"
-                style="@style/mine_action_style"
-                android:text="关于作者"
-                app:drawableStartCompat="@drawable/mine_baseline_explore_green_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/history" />
+        <TextView
+            android:id="@+id/history"
+            style="@style/mine_action_style"
+            android:text="历史记录"
+            app:drawableStartCompat="@drawable/mine_baseline_history_cyan_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/later_read" />
 
-            <TextView
-                android:id="@+id/setting"
-                style="@style/mine_action_style"
-                android:text="系统设置"
-                app:drawableStartCompat="@drawable/mine_baseline_settings_deep_orange_500_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/about_author" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <TextView
+            android:id="@+id/about_author"
+            style="@style/mine_action_style"
+            android:text="关于作者"
+            app:drawableStartCompat="@drawable/mine_baseline_explore_green_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history" />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/setting"
+            style="@style/mine_action_style"
+            android:text="系统设置"
+            app:drawableStartCompat="@drawable/mine_baseline_settings_deep_orange_500_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/about_author" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

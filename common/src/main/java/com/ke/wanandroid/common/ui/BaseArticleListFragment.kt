@@ -2,6 +2,8 @@ package com.ke.wanandroid.common.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.PopupMenu
@@ -36,28 +38,37 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
             setOnItemChildClickListener { adapter, view, position ->
                 val article = adapter.getItem(position) as WanArticleResponse
                 val popupMenu = PopupMenu(view.context, view)
-                if (article.collect) {
-                    popupMenu.menu.add(0, 1, 0, "取消收藏")
-                } else {
-                    popupMenu.menu.add(0, 0, 0, "收藏")
-                }
-                popupMenu.menu.add(0, 2, 0, "稍后阅读")
+                onCreateActionPopupMenu(popupMenu.menu, article)
+
                 popupMenu.setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        0 -> {
-                            baseArticleListViewModel.collectArticle(article)
-                        }
-                        1 -> {
-                            baseArticleListViewModel.cancelCollectArticle(article)
-                        }
-                        2 -> {
-                        }
-                    }
+                    onMenuItemClick(it, article)
                     return@setOnMenuItemClickListener true
                 }
 
                 popupMenu.show()
 
+            }
+        }
+    }
+
+    protected open fun onCreateActionPopupMenu(menu: Menu, article: WanArticleResponse) {
+        if (article.collect) {
+            menu.add(0, 1, 0, "取消收藏")
+        } else {
+            menu.add(0, 0, 0, "收藏")
+        }
+        menu.add(0, 2, 0, "稍后阅读")
+    }
+
+    protected open fun onMenuItemClick(menuItem: MenuItem, article: WanArticleResponse) {
+        when (menuItem.itemId) {
+            0 -> {
+                baseArticleListViewModel.collectArticle(article)
+            }
+            1 -> {
+                baseArticleListViewModel.cancelCollectArticle(article)
+            }
+            2 -> {
             }
         }
     }

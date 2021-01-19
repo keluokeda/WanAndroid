@@ -142,6 +142,32 @@ interface WanApiService {
     @POST("/lg/uncollect_originId/{id}/json")
     suspend fun cancelCollectArticle(@Path("id") id: Int): WanBaseResponse<Any>
 
+    /**
+     * 获取自己分享的文章
+     */
+    @GET("/user/lg/private_articles/{page}/json")
+    suspend fun getMySharedArticles(
+        @Path("page") page: Int
+    ): WanBaseResponse<WanUserArticleResponse>
+
+    /**
+     * 删除我分享出去的文章
+     */
+    @POST("/lg/user_article/delete/{id}/json")
+    suspend fun deleteMyShareArticle(
+        @Path("id") id: Int
+    ): WanBaseResponse<Any>
+
+    /**
+     * 分享文章
+     */
+    @FormUrlEncoded
+    @POST("/lg/user_article/add/json")
+    suspend fun shareArticle(
+        @Field("title") title: String,
+        @Field("link") link: String
+    ): WanBaseResponse<Any>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

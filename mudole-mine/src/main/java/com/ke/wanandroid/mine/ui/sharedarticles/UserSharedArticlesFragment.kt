@@ -1,25 +1,25 @@
-package com.ke.wanandroid.mine.ui.sharedartiles
+package com.ke.wanandroid.mine.ui.sharedarticles
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hi.dhl.binding.viewbind
+import com.ke.wanandroid.common.const.PagePath
+import com.ke.wanandroid.common.databinding.LayoutBaseListBinding
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import com.ke.wanandroid.mine.R
-import com.ke.wanandroid.mine.databinding.MineFragmentUserSharedArticlesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class UserSharedArticlesFragment :
-    BaseArticleListFragment(R.layout.mine_fragment_user_shared_articles) {
+    BaseArticleListFragment(com.ke.wanandroid.common.R.layout.layout_base_list) {
 
 
     private val viewModel: UserSharedArticlesViewModel by viewModels()
-    private val binding: MineFragmentUserSharedArticlesBinding by viewbind()
+    private val binding: LayoutBaseListBinding by viewbind()
     override val baseArticleListViewModel: BaseArticleListViewModel<*>
         get() = viewModel
 
@@ -32,13 +32,12 @@ class UserSharedArticlesFragment :
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
         viewModel.userInfo.observe(viewLifecycleOwner) {
             binding.toolbar.title = it.first
 //            binding.toolbar.subtitle = it.second
         }
-        adapter.setOnItemClickListener { _, view, position ->
 
-        }
 
         setupRetry(binding.retry, binding.recyclerView, viewModel)
 

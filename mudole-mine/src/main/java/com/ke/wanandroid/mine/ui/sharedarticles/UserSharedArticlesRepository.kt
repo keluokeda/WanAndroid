@@ -1,6 +1,5 @@
-package com.ke.wanandroid.mine.ui.sharedartiles
+package com.ke.wanandroid.mine.ui.sharedarticles
 
-import com.ke.mvvm.base.data.BaseDataListRepository
 import com.ke.mvvm.base.data.Result
 import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.api.response.WanArticleResponse

@@ -1,4 +1,4 @@
-package com.ke.wanandroid.mine.ui.sharedartiles
+package com.ke.wanandroid.mine.ui.sharedarticles
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment

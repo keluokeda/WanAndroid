@@ -35,6 +35,8 @@ abstract class BaseViewModel : ViewModel() {
         get() = _contentViewVisible
 
 
+
+
     @CallSuper
     override fun onCleared() {
         compositeDisposable.dispose()

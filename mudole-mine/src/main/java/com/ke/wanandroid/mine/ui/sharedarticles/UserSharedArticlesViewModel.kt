@@ -1,4 +1,4 @@
-package com.ke.wanandroid.mine.ui.sharedartiles
+package com.ke.wanandroid.mine.ui.sharedarticles
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
-import com.ke.mvvm.base.ui.BaseDataListViewModel
-import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import kotlinx.coroutines.launch

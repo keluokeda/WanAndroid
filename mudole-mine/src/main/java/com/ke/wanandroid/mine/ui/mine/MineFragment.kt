@@ -49,7 +49,9 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             myCollection.setOnClickListener {
                 ARouter.getInstance().build(PagePath.MY_COLLECTIONS).navigation()
             }
-
+            myShare.setOnClickListener {
+                ARouter.getInstance().build(PagePath.MY_SHARE_ARTICLES).navigation()
+            }
         }
 
         viewModel.isRefreshing.observe(viewLifecycleOwner) {
