@@ -14,6 +14,7 @@ import com.ke.wanandroid.api.response.WanBannerResponse
 import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import com.ke.wanandroid.databinding.FragmentHomeBinding
 import com.ke.wanandroid.databinding.LayoutBannerBinding
 import com.youth.banner.adapter.BannerImageAdapter
@@ -27,6 +28,8 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModels()
 
     private val binding: FragmentHomeBinding by viewbind()
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = homeViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

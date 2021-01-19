@@ -119,6 +119,29 @@ interface WanApiService {
         @Path("page") page: Int
     ): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
+    /**
+     * 收藏文章
+     */
+    @POST("/lg/collect/{id}/json")
+    suspend fun collectArticle(
+        @Path("id") id: Int
+    ): WanBaseResponse<Any>
+
+    /**
+     * 从我的收藏里面取消收藏
+     */
+    @POST("/lg/uncollect/{id}/json")
+    suspend fun cancelCollectArticle(
+        @Path("id") id: Int,
+        @Query("originId") originId: Int
+    ): WanBaseResponse<Any>
+
+    /**
+     * 从文章列表页面取消收藏
+     */
+    @POST("/lg/uncollect_originId/{id}/json")
+    suspend fun cancelCollectArticle(@Path("id") id: Int): WanBaseResponse<Any>
+
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"
     }

@@ -5,11 +5,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import com.ke.mvvm.base.ui.BaseDataListViewModel
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 
 class ArticleListViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val articleListRepository: ArticleListRepository
-) : BaseDataListViewModel<Pair<Int, String?>, WanArticleResponse>(
+) : BaseArticleListViewModel<Pair<Int, String?>>(
     articleListRepository
 ) {
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
 
@@ -71,6 +72,20 @@ abstract class BaseDataListFragment(layoutId: Int) : BaseFragment(layoutId) {
         viewModel.retryViewVisible.observe(viewLifecycleOwner) {
             retryView.isVisible = it
             contentView.isVisible = !it
+        }
+    }
+
+    protected open fun setupSnackbar(viewModel: BaseViewModel) {
+        viewModel.snackbarEvent.observe(viewLifecycleOwner) { action ->
+            view?.apply {
+                Snackbar.make(this, action.message, action.duration).apply {
+                    if (action.action != null && action.actionName != null) {
+                        setAction(action.actionName) {
+                            action.action.invoke()
+                        }
+                    }
+                }.show()
+            }
         }
     }
 }

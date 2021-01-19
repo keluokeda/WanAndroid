@@ -14,6 +14,7 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.log
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import com.ke.wanandroid.officialaccount.R
 import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentArticleListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,28 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ArticleListFragment :
     BaseArticleListFragment(R.layout.official_accounts_fragment_article_list) {
-
-//    private val adapter =
-//        object : BaseViewBindingAdapter<WanArticleResponse, OfficialAccountsItemArticleBinding>(),
-//            LoadMoreModule {
-//            override fun createViewBinding(
-//                inflater: LayoutInflater,
-//                parent: ViewGroup
-//            ): OfficialAccountsItemArticleBinding {
-//                return OfficialAccountsItemArticleBinding.inflate(inflater, parent, false)
-//            }
-//
-//            override fun convert(
-//                holder: ViewBindingViewHolder<OfficialAccountsItemArticleBinding>,
-//                item: WanArticleResponse
-//            ) {
-//                holder.viewBinding.time.text = item.niceDate
-//                holder.viewBinding.title.text = item.title
-//                holder.viewBinding.author.text = item.author
-//                holder.viewBinding.chapter.text = item.superChapterName + ":" + item.chapterName
-//            }
-//
-//        }
 
 
     override fun bindData(
@@ -56,6 +35,8 @@ class ArticleListFragment :
 
     private val binding: OfficialAccountsFragmentArticleListBinding by viewbind()
     private val viewModel: ArticleListViewModel by viewModels()
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = viewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         "$this onViewCreated".log()

@@ -20,7 +20,7 @@ data class WanArticleResponse(
     @SerializedName("chapterName")
     val chapterName: String = "",
     @SerializedName("collect")
-    val collect: Boolean = true,
+    var collect: Boolean = true,
     @SerializedName("courseId")
     val courseId: Int = 0,
     @SerializedName("desc")
@@ -39,6 +39,7 @@ data class WanArticleResponse(
     val link: String = "",
     @SerializedName("niceDate")
     val niceDate: String = "",
+    val originId: Int = 0,
 //    @SerializedName("niceShareDate")
 //    val niceShareDate: String,
 //    @SerializedName("origin")
@@ -56,22 +57,29 @@ data class WanArticleResponse(
 //    @SerializedName("shareDate")
 //    val shareDate: Long,
     @SerializedName("shareUser")
-    val shareUser: String = "",
-    @SerializedName("superChapterId")
-    val superChapterId: Int = 0,
-    @SerializedName("superChapterName")
-    val superChapterName: String = "",
-    @SerializedName("tags")
-    val tags: List<Tag> = emptyList(),
-    @SerializedName("title")
-    val title: String = "",
+val shareUser: String = "",
+
+@SerializedName("superChapterId")
+val superChapterId: Int = 0,
+
+@SerializedName("superChapterName")
+val superChapterName: String = "",
+
+@SerializedName("tags")
+val tags: List<Tag> = emptyList(),
+
+@SerializedName("title")
+val title: String = "",
+
 //    @SerializedName("type")
 //    val type: Int,
-    @SerializedName("userId")
-    val userId: Int = 0,
-    @SerializedName("visible")
-    val visible: Int = 0,
-    @SerializedName("zan")
-    val zan: Int = 0
+@SerializedName("userId")
+val userId: Int = 0,
+
+@SerializedName("visible")
+val visible: Int = 0,
+
+@SerializedName("zan")
+val zan: Int = 0
 ) : Parcelable
 

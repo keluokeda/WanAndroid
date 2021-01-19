@@ -6,12 +6,13 @@ import androidx.lifecycle.SavedStateHandle
 import com.ke.mvvm.base.ui.BaseDataListViewModel
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanTopicResponse
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 
 class ArticleListViewModel @ViewModelInject constructor(
     articleListRepository: ArticleListRepository,
     @Assisted savedStateHandle: SavedStateHandle
 ) :
-    BaseDataListViewModel<Int, WanArticleResponse>(articleListRepository) {
+    BaseArticleListViewModel<Int>(articleListRepository) {
 
     override val startIndex: Int
         get() = 0

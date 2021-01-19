@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import com.ke.wanandroid.system.R
 import com.ke.wanandroid.system.databinding.SystemFragmentArticleListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +18,8 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
 
     private val binding: SystemFragmentArticleListBinding by viewbind()
     private val viewModel: ArticleListViewModel by viewModels()
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = viewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

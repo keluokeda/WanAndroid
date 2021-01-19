@@ -10,13 +10,14 @@ import com.ke.mvvm.base.data.Result
 import com.ke.mvvm.base.ui.BaseDataListViewModel
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.const.ExtraKey
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import kotlinx.coroutines.launch
 
 class UserSharedArticlesViewModel
 @ViewModelInject constructor(
     private val userSharedArticlesRepository: UserSharedArticlesRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
-) : BaseDataListViewModel<Int, WanArticleResponse>(userSharedArticlesRepository) {
+) : BaseArticleListViewModel<Int>(userSharedArticlesRepository) {
 
     private val userId =
         savedStateHandle.get<Int>(ExtraKey.USER_ID) ?: throw RuntimeException("需要传入用户id")

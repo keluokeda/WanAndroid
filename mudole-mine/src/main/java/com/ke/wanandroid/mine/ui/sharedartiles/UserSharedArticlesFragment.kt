@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import com.ke.wanandroid.mine.R
 import com.ke.wanandroid.mine.databinding.MineFragmentUserSharedArticlesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,9 @@ class UserSharedArticlesFragment :
 
     private val viewModel: UserSharedArticlesViewModel by viewModels()
     private val binding: MineFragmentUserSharedArticlesBinding by viewbind()
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = viewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

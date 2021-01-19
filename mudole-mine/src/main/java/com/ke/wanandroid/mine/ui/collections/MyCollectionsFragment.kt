@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.common.databinding.LayoutBaseListBinding
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,6 +17,8 @@ class MyCollectionsFragment :
     private val viewModel: MyCollectionsViewModel by viewModels()
 
     private val binding: LayoutBaseListBinding by viewbind()
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = viewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

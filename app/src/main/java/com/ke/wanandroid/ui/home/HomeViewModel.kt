@@ -10,13 +10,14 @@ import com.ke.wanandroid.api.response.WanBannerResponse
 import kotlinx.coroutines.launch
 import com.ke.mvvm.base.data.Result
 import com.ke.mvvm.base.ui.BaseDataListViewModel
+import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import java.lang.Exception
 
 
 class HomeViewModel @ViewModelInject constructor(
     private val homeRepository: HomeRepository
 ) :
-    BaseDataListViewModel<Any, WanArticleResponse>(homeRepository) {
+    BaseArticleListViewModel<Any>(homeRepository) {
 
 
     override val params: Any

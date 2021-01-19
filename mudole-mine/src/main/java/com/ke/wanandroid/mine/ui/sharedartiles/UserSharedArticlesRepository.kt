@@ -4,10 +4,11 @@ import com.ke.mvvm.base.data.BaseDataListRepository
 import com.ke.mvvm.base.data.Result
 import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.model.BaseArticleListRepository
 import javax.inject.Inject
 
 class UserSharedArticlesRepository @Inject constructor(private val wanApiService: WanApiService) :
-    BaseDataListRepository<Int, WanArticleResponse>() {
+    BaseArticleListRepository<Int>(wanApiService) {
     override suspend fun getDataList(index: Int, params: Int): Result<List<WanArticleResponse>> {
         return try {
             Result.Success(
