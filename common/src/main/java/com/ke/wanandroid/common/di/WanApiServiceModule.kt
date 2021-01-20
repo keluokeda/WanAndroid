@@ -5,14 +5,12 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.ke.wanandroid.api.WanApiService
-import com.ke.wanandroid.common.log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -25,14 +23,14 @@ object WanApiServiceModule {
     @Provides
     @Singleton
     fun provideOkHttp(@ApplicationContext context: Context): OkHttpClient {
-        val httpLoggingInterceptor =
-            HttpLoggingInterceptor { message -> message.log() }.apply {
-                level = HttpLoggingInterceptor.Level.HEADERS
-            }
+//        val httpLoggingInterceptor =
+//            HttpLoggingInterceptor { message -> message.log() }.apply {
+//                level = HttpLoggingInterceptor.Level.HEADERS
+//            }
 
         return OkHttpClient.Builder()
             .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context)))
-            .addNetworkInterceptor(httpLoggingInterceptor)
+//            .addNetworkInterceptor(httpLoggingInterceptor)
             .build()
     }
 

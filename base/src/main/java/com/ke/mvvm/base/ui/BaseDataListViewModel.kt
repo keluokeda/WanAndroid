@@ -108,6 +108,9 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
      */
     protected open fun onLoadDataError(result: ListResult<R>, forceRefresh: Boolean) {
         _isRefreshing.value = false
+        if (_dataList.value == null) {
+            _retryViewVisible.value = true
+        }
         if (result.canRetry) {
             _loadDataResult.value = LOAD_DATA_RESULT_ERROR
         } else {

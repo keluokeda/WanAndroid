@@ -15,33 +15,37 @@
         app:title="深色模式" />
 
     <RadioGroup
+        android:id="@+id/mode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingStart="16dp">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="不指定"
-            style="@style/settings_StyleNightModeRadioButton" />
+            android:id="@+id/mode_default"
+            style="@style/settings_StyleNightModeRadioButton"
+            android:text="默认" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="深色"
-            style="@style/settings_StyleNightModeRadioButton" />
+            android:id="@+id/mode_night"
+            style="@style/settings_StyleNightModeRadioButton"
+            android:text="深色" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="浅色"
-            style="@style/settings_StyleNightModeRadioButton" />
+            android:id="@+id/mode_day"
+            style="@style/settings_StyleNightModeRadioButton"
+            android:text="浅色" />
+
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="跟随系统"
-            style="@style/settings_StyleNightModeRadioButton" />
+            android:id="@+id/mode_auto_battery"
+            style="@style/settings_StyleNightModeRadioButton"
+            android:text="根据电量自动开启或关闭深色模式" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="根据电量自动开启或关闭深色模式"
-            style="@style/settings_StyleNightModeRadioButton" />
+            android:id="@+id/mode_follow_system"
+            style="@style/settings_StyleNightModeRadioButton"
+            android:text="跟随系统" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:text="跟随时间自动开启或关闭深色模式"
-            style="@style/settings_StyleNightModeRadioButton" />
     </RadioGroup>
 </LinearLayout>

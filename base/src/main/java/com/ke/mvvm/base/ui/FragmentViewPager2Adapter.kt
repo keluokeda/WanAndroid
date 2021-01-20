@@ -3,10 +3,9 @@ package com.ke.mvvm.base.ui
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class FragmentViewPager2Adapter<T>(
+class FragmentViewPager2Adapter(
     fragment: Fragment,
-    private val list: List<T>,
-    private val creator: (T) -> Fragment
+    private val list: List<Fragment>
 ) :
     FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
@@ -14,6 +13,6 @@ class FragmentViewPager2Adapter<T>(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return creator(list[position])
+        return list[position]
     }
 }

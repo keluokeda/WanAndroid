@@ -9,6 +9,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/action_project"
+        android:icon="@drawable/baseline_all_out_white_24dp"
+        android:title="项目"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_official_accounts"
         android:icon="@drawable/baseline_people_outline_white_24dp"
         android:title="公众号"

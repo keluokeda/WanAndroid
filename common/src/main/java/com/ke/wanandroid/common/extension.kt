@@ -1,6 +1,7 @@
 package com.ke.wanandroid.common
 
 import android.os.Parcelable
+import androidx.appcompat.app.AppCompatDelegate
 import com.ke.mvvm.base.data.BaseDataListRepository
 import com.ke.mvvm.base.data.ListResult
 import com.ke.wanandroid.api.response.WanBaseResponse
@@ -29,4 +30,15 @@ fun <R : Parcelable> getListResultFromWanBaseResponse(
         ListResult(errorMessage = response.errorMsg, canRetry = false)
     }
 }
+
+val nightModeList = listOf(
+    AppCompatDelegate.MODE_NIGHT_UNSPECIFIED,
+    AppCompatDelegate.MODE_NIGHT_YES,
+    AppCompatDelegate.MODE_NIGHT_NO,
+    AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY,
+    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+)
+val nightModeDescriptionList = listOf(
+    "默认", "深色", "浅色", "跟随电量", "跟随系统"
+)
 

@@ -3,8 +3,6 @@ package com.ke.wanandroid.officialaccount.ui.article
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
-import com.ke.mvvm.base.ui.BaseDataListViewModel
-import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 
 class ArticleListViewModel @ViewModelInject constructor(
@@ -22,10 +20,9 @@ class ArticleListViewModel @ViewModelInject constructor(
             loadData(true)
         }
 
-    init {
 
-        keyword = null
-
+    override fun onCleared() {
+        super.onCleared()
     }
 
     override val params: Pair<Int, String?>

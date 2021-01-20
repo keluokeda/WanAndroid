@@ -1,5 +1,4 @@
-package com.ke.wanandroid.officialaccount.ui.article
-
+package com.ke.wanandroid.ui.project
 
 import android.os.Bundle
 import android.view.View
@@ -8,20 +7,33 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
+import com.ke.wanandroid.R
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import com.ke.wanandroid.officialaccount.R
-import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentArticleListBinding
+import com.ke.wanandroid.databinding.FragmentProjectArticlesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ArticleListFragment :
-    BaseArticleListFragment(R.layout.official_accounts_fragment_article_list) {
+class ProjectArticlesFragment : BaseArticleListFragment(R.layout.fragment_project_articles) {
 
     protected var isFirstResume = true
 
+    private val viewModel: ProjectArticlesViewModel by viewModels()
+
+    override val baseArticleListViewModel: BaseArticleListViewModel<*>
+        get() = viewModel
+
+    private val binding: FragmentProjectArticlesBinding by viewbind()
+
+    override fun onResume() {
+        super.onResume()
+        if (isFirstResume) {
+            isFirstResume = false
+            viewModel.start()
+        }
+    }
 
     override fun bindData(
         holder: ViewBindingViewHolder<ItemArticleBinding>,
@@ -32,11 +44,6 @@ class ArticleListFragment :
         holder.viewBinding.tag.isVisible = false
     }
 
-    private val binding: OfficialAccountsFragmentArticleListBinding by viewbind()
-    private val viewModel: ArticleListViewModel by viewModels()
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, viewModel)
@@ -44,21 +51,9 @@ class ArticleListFragment :
 
     }
 
-    fun setKeyWord(keyword: String) {
-        viewModel.keyword = keyword
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isFirstResume) {
-            viewModel.keyword = null
-            isFirstResume = false
-        }
-    }
-
     companion object {
-        fun createInstance(id: Int): ArticleListFragment {
-            val fragment = ArticleListFragment()
+        fun createInstance(id: Int): ProjectArticlesFragment {
+            val fragment = ProjectArticlesFragment()
             fragment.arguments = bundleOf("id" to id)
             return fragment
         }

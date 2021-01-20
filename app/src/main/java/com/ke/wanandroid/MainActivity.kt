@@ -1,9 +1,9 @@
 package com.ke.wanandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +12,7 @@ import com.ke.wanandroid.mine.ui.mine.MineFragment
 import com.ke.wanandroid.officialaccount.ui.officialaccounts.OfficialAccountsFragment
 import com.ke.wanandroid.system.ui.system.SystemFragment
 import com.ke.wanandroid.ui.home.HomeFragment
+import com.ke.wanandroid.ui.project.ProjectFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @Route(path = PagePath.MAIN)
@@ -32,9 +33,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> showFragment(0)
-                R.id.action_official_accounts -> showFragment(1)
-                R.id.action_system -> showFragment(2)
-                R.id.action_me -> showFragment(3)
+                R.id.action_project -> showFragment(1)
+                R.id.action_official_accounts -> showFragment(2)
+                R.id.action_system -> showFragment(3)
+                R.id.action_me -> showFragment(4)
             }
             return@setOnNavigationItemSelectedListener true
         }
@@ -71,6 +73,11 @@ class MainActivity : AppCompatActivity() {
         fragmentList.add(
             supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name)
                 ?: HomeFragment()
+        )
+
+        fragmentList.add(
+            supportFragmentManager.findFragmentByTag(ProjectFragment::class.java.name)
+                ?: ProjectFragment()
         )
 
         fragmentList.add(
