@@ -27,6 +27,7 @@ class SquareFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
         super.onResume()
         if (isFirstResume) {
             isFirstResume = false
+
             viewModel.refresh()
         }
     }
