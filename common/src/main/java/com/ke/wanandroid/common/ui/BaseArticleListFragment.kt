@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -18,6 +17,7 @@ import com.ke.mvvm.base.ui.BaseDataListViewModel
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.R
+import com.ke.wanandroid.common.bindArticle
 import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
@@ -85,25 +85,7 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
         holder: ViewBindingViewHolder<ItemArticleBinding>,
         item: WanArticleResponse
     ) {
-        holder.viewBinding.apply {
-            isNew.isVisible = item.fresh
-            author.text =
-                if (item.author.isNotEmpty()) item.author else (if (item.shareUser.isNotEmpty()) item.shareUser else "匿名")
-            tag.isVisible = item.tags.isNotEmpty()
-            tag.text = item.tags.firstOrNull()?.name
-            if (item.envelopePic.isEmpty()) {
-                image.isVisible = false
-            } else {
-                image.isVisible = true
-                Glide.with(this@BaseArticleListFragment).load(item.envelopePic).into(image)
-            }
-            title.text = item.title
-            desc.isVisible = item.desc.isNotEmpty()
-            title.maxLines = if (item.desc.isNotEmpty()) 1 else 3
-            desc.text = item.desc
-            chapter.text = item.superChapterName + ":" + item.chapterName
-            time.text = item.niceDate
-        }
+        holder.viewBinding.bindArticle(item, Glide.with(this))
     }
 
     override fun <T> setupAdapter(

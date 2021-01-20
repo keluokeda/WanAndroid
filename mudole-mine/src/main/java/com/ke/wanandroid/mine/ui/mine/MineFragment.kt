@@ -52,7 +52,9 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             myShare.setOnClickListener {
                 ARouter.getInstance().build(PagePath.MY_SHARE_ARTICLES).navigation()
             }
-
+            history.setOnClickListener {
+                ARouter.getInstance().build(PagePath.ARTICLE_RECORDS).navigation()
+            }
             setting.setOnClickListener {
                 ARouter.getInstance().build(PagePath.SETTINGS).navigation()
             }

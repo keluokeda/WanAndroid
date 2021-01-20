@@ -30,5 +30,7 @@ class PagePath private constructor() {
         const val SETTINGS = "/settings/main"
 
         const val NIGHT_MODE_SETTINGS = "/settings/nightMode"
+
+        const val ARTICLE_RECORDS = "/mine/articleRecords"
     }
 }
