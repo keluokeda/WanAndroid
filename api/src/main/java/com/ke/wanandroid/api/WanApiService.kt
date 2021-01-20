@@ -56,7 +56,7 @@ interface WanApiService {
      * 获取某个公众号的历史文章
      */
     @GET("/wxarticle/list/{id}/{page}/json")
-    suspend fun getBlogArticle(
+    suspend fun getBlogArticles(
         @Path("id") id: Int,
         @Path("page") page: Int,
         @Query("k") keyword: String? = null

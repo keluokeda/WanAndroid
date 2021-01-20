@@ -1,8 +1,6 @@
 package com.ke.wanandroid.api.response
 
-import android.os.Parcelable
 import kotlinx.parcelize.IgnoredOnParcel
-import kotlinx.parcelize.Parcelize
 
 
 data class WanBaseResponse<T>(

@@ -48,9 +48,6 @@ class HomeViewModel @ViewModelInject constructor(
 
 
 
-    override fun onLoadDataError(exception: Exception) {
-        super.onLoadDataError(exception)
 
-    }
 
 }

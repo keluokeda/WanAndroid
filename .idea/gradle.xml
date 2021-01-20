@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/module-h5" />
             <option value="$PROJECT_DIR$/module-officialAccount" />
+            <option value="$PROJECT_DIR$/module-settings" />
             <option value="$PROJECT_DIR$/module-system" />
             <option value="$PROJECT_DIR$/mudole-mine" />
           </set>

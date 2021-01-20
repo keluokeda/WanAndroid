@@ -52,11 +52,6 @@ class ArticleListFragment :
             )
         )
 
-        adapter.addChildClickViewIds(R.id.action)
-
-        adapter.setOnItemChildClickListener { _, _, position ->
-
-        }
 
         setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 

@@ -10,8 +10,8 @@ kapt {
     }
 }
 android {
-    compileSdkVersion compile_version
-    buildToolsVersion build_version
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 21
@@ -21,7 +21,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        resourcePrefix 'h5'
+        resourcePrefix 'settings'
 
     }
 
@@ -58,5 +58,6 @@ dependencies {
 
     implementation "com.alibaba:arouter-api:$arouter_version"
     kapt "com.alibaba:arouter-compiler:$arouter_version"
-
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 }

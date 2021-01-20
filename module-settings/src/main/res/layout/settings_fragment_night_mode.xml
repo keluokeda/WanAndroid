@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".nightmode.NightModeFragment">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarTheme"
+        app:navigationIcon="@drawable/baseline_arrow_back_toolbar_24dp"
+        app:title="深色模式" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="不指定"
+            style="@style/settings_StyleNightModeRadioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="深色"
+            style="@style/settings_StyleNightModeRadioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="浅色"
+            style="@style/settings_StyleNightModeRadioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="跟随系统"
+            style="@style/settings_StyleNightModeRadioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="根据电量自动开启或关闭深色模式"
+            style="@style/settings_StyleNightModeRadioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:text="跟随时间自动开启或关闭深色模式"
+            style="@style/settings_StyleNightModeRadioButton" />
+    </RadioGroup>
+</LinearLayout>

@@ -25,6 +25,10 @@ class PagePath private constructor() {
 
         const val MY_SHARE_ARTICLES = "/mine/shareArticles"
 
-        const val SHARE_ARTICLE="/mine/shareArticle"
+        const val SHARE_ARTICLE = "/mine/shareArticle"
+
+        const val SETTINGS = "/settings/main"
+
+        const val NIGHT_MODE_SETTINGS = "/settings/nightMode"
     }
 }

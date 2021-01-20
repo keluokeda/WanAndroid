@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.BaseDataListRepository
-import com.ke.mvvm.base.data.Result
-
+import com.ke.mvvm.base.data.ListResult
+import com.ke.mvvm.base.model.SnackbarAction
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 abstract class BaseDataListViewModel<Params, R>(private val baseDataListRepository: BaseDataListRepository<Params, R>) :
     BaseViewModel() {
@@ -68,30 +67,32 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
     protected open fun loadData(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             onLoadDataStart(forceRefresh)
-
             val result =
-                baseDataListRepository.getDataList(index, params)
-            when (result) {
-                is Result.Success -> {
-                    val list = result.data
-                    if (list.isEmpty()) {
-                        if (forceRefresh) {
-                            _dataList.value = emptyList()
-                        }
-                        _loadDataResult.value = LOAD_DATA_RESULT_END
-                    } else {
-                        _dataList.value =
-                            if (forceRefresh) list else ((_dataList.value ?: emptyList()) + list)
-
-                        _loadDataResult.value = LOAD_DATA_RESULT_SUCCESS
-                        index++
-                    }
-                }
-                is Result.Error -> {
-                    onLoadDataError(result.exception)
-                }
+                baseDataListRepository.getListResult(index, params)
+            if (result.isSuccess) {
+                loadDataSuccess(result, forceRefresh)
+            } else {
+                onLoadDataError(result, forceRefresh)
             }
             onLoadDataFinish(forceRefresh)
+        }
+    }
+
+    protected open fun loadDataSuccess(
+        result: ListResult<R>,
+        forceRefresh: Boolean
+    ) {
+        if (result.list.isEmpty()) {
+            if (forceRefresh) {
+                _dataList.value = emptyList()
+            }
+            _loadDataResult.value = LOAD_DATA_RESULT_END
+        } else {
+            _dataList.value =
+                if (forceRefresh) result.list else ((_dataList.value
+                    ?: emptyList()) + result.list)
+            _loadDataResult.value =
+                if (result.over) LOAD_DATA_RESULT_END else LOAD_DATA_RESULT_SUCCESS
         }
     }
 
@@ -105,10 +106,13 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
     /**
      * 加载数据出错的时候会回调这个方法
      */
-    protected open fun onLoadDataError(exception: Exception) {
-        _loadDataResult.value = LOAD_DATA_RESULT_ERROR
-        if (_dataList.value == null) {
-            _retryViewVisible.value = true
+    protected open fun onLoadDataError(result: ListResult<R>, forceRefresh: Boolean) {
+        _isRefreshing.value = false
+        if (result.canRetry) {
+            _loadDataResult.value = LOAD_DATA_RESULT_ERROR
+        } else {
+            _loadDataResult.value = LOAD_DATA_RESULT_END
+            _snackbarEvent.value = SnackbarAction(result.errorMessage)
         }
     }
 
