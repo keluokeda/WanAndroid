@@ -9,18 +9,18 @@ import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
+import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import com.ke.wanandroid.officialaccount.R
-import com.ke.wanandroid.officialaccount.databinding.OfficialAccountsFragmentArticleListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ArticleListFragment :
-    BaseArticleListFragment(R.layout.official_accounts_fragment_article_list) {
+    BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
 
-    protected var isFirstResume = true
+    private var isFirstResume = true
 
 
     override fun bindData(
@@ -32,7 +32,7 @@ class ArticleListFragment :
         holder.viewBinding.tag.isVisible = false
     }
 
-    private val binding: OfficialAccountsFragmentArticleListBinding by viewbind()
+    private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
     private val viewModel: ArticleListViewModel by viewModels()
     override val baseArticleListViewModel: BaseArticleListViewModel<*>
         get() = viewModel

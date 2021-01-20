@@ -41,7 +41,6 @@ interface WanApiService {
     suspend fun getArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
 
-
     /**
      * 获取公众号分类
      */
@@ -177,6 +176,14 @@ interface WanApiService {
     suspend fun getProjectArticles(
         @Path("page") page: Int,
         @Query("cid") cid: Int
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
+    /**
+     * 广场文章数据
+     */
+    @GET("/user_article/list/{page}/json")
+    suspend fun getSquareArticles(
+        @Path("page") page: Int
     ): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
     companion object {

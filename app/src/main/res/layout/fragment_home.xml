@@ -7,13 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/tool_bar"
-        style="@style/ToolbarTheme"
-        app:menu="@menu/menu_search"
-        app:title="首页"
-        app:titleTextColor="@color/toolbarTitleColor" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"

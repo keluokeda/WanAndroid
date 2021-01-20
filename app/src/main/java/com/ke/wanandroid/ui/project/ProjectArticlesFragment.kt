@@ -7,25 +7,25 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.ViewBindingViewHolder
-import com.ke.wanandroid.R
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
+import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import com.ke.wanandroid.databinding.FragmentProjectArticlesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProjectArticlesFragment : BaseArticleListFragment(R.layout.fragment_project_articles) {
+class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
 
-    protected var isFirstResume = true
+    private var isFirstResume = true
 
     private val viewModel: ProjectArticlesViewModel by viewModels()
 
     override val baseArticleListViewModel: BaseArticleListViewModel<*>
         get() = viewModel
 
-    private val binding: FragmentProjectArticlesBinding by viewbind()
+    private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
 
     override fun onResume() {
         super.onResume()

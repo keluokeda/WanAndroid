@@ -3,9 +3,7 @@ package com.ke.wanandroid.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.hi.dhl.binding.viewbind
@@ -37,7 +35,6 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
 
 
 
-        setupRetry(binding.retry, binding.recyclerView, homeViewModel)
 
         homeViewModel.bannerData.observe(viewLifecycleOwner) {
             if (adapter.headerLayoutCount == 0) {
@@ -66,6 +63,8 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
                 adapter.addHeaderView(header.root)
             }
         }
+        setupRetry(binding.retry, binding.recyclerView, homeViewModel)
+
 
         setupAdapter(
             binding.swipeRefreshLayout,
@@ -73,8 +72,5 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
             adapter,
             binding.recyclerView
         )
-
-
-//        binding.toolBar.menu.add(0, 0, 0, "搜索").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
     }
 }

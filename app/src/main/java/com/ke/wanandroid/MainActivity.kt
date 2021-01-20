@@ -11,7 +11,7 @@ import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.mine.ui.mine.MineFragment
 import com.ke.wanandroid.officialaccount.ui.officialaccounts.OfficialAccountsFragment
 import com.ke.wanandroid.system.ui.system.SystemFragment
-import com.ke.wanandroid.ui.home.HomeFragment
+import com.ke.wanandroid.ui.main.MainFragment
 import com.ke.wanandroid.ui.project.ProjectFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,8 +71,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFragmentList() {
         fragmentList.add(
-            supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name)
-                ?: HomeFragment()
+            supportFragmentManager.findFragmentByTag(MainFragment::class.java.name)
+                ?: MainFragment()
         )
 
         fragmentList.add(
