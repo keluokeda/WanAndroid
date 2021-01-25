@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class MyShareArticleViewModel @ViewModelInject constructor(
     private val myShareArticlesRepository: MyShareArticlesRepository,
-    private val eventBus: EventBus
+    eventBus: EventBus
 ) :
     BaseArticleListViewModel<Any>(myShareArticlesRepository) {
     override val params: Any

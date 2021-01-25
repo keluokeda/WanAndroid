@@ -1,4 +1,4 @@
-package com.ke.wanandroid.common.model
+package com.ke.wanandroid.common.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

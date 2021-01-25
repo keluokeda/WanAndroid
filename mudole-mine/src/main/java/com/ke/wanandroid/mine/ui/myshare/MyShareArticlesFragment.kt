@@ -26,7 +26,7 @@ class MyShareArticlesFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
 
         binding.toolbar.title = "我的分享"

@@ -1,10 +1,13 @@
 package com.ke.mvvm.base.ui
 
 import android.content.Context
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     /**
@@ -39,5 +42,54 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     fun onBackPressed() {
         activity?.onBackPressed()
+    }
+
+    protected open fun setupRetryAndLoading(
+        retryView: View,
+        loadingView: View,
+        contentView: View,
+        baseViewModel: BaseViewModel
+    ) {
+        baseViewModel.loadingViewVisible.observe(viewLifecycleOwner) {
+            loadingView.isVisible = it
+        }
+        baseViewModel.retryViewVisible.observe(viewLifecycleOwner) {
+            retryView.isVisible = it
+        }
+        baseViewModel.contentViewVisible.observe(viewLifecycleOwner) {
+            contentView.isVisible = it
+        }
+        retryView.setOnClickListener {
+            baseViewModel.retry()
+        }
+    }
+
+    protected open fun setupRetry(
+        retryView: View,
+        contentView: View,
+        viewModel: BaseViewModel
+    ) {
+        retryView.setOnClickListener {
+            viewModel.retry()
+        }
+        viewModel.retryViewVisible.observe(viewLifecycleOwner) {
+            retryView.isVisible = it
+            contentView.isVisible = !it
+        }
+    }
+
+
+    protected open fun setupSnackbar(viewModel: BaseViewModel) {
+        viewModel.snackbarEvent.observe(viewLifecycleOwner) { action ->
+            view?.apply {
+                Snackbar.make(this, action.message, action.duration).apply {
+                    if (action.action != null && action.actionName != null) {
+                        setAction(action.actionName) {
+                            action.action.invoke()
+                        }
+                    }
+                }.show()
+            }
+        }
     }
 }

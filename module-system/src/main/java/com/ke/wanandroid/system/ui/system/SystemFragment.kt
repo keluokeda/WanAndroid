@@ -2,49 +2,29 @@ package com.ke.wanandroid.system.ui.system
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxItemDecoration
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.hi.dhl.binding.viewbind
-import com.ke.mvvm.base.ui.BaseFragment
-import com.ke.wanandroid.system.R
-import com.ke.wanandroid.system.databinding.SystemFragmentSystemBinding
+import com.alibaba.android.arouter.launcher.ARouter
+import com.ke.wanandroid.api.response.WanTopicResponse
+import com.ke.wanandroid.common.const.ExtraKey
+import com.ke.wanandroid.common.const.PagePath
+import com.ke.wanandroid.common.ui.category.BaseCategoryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SystemFragment : BaseFragment(R.layout.system_fragment_system) {
+class SystemFragment : BaseCategoryFragment() {
 
 
-    private val viewModel: SystemViewModel by viewModels()
-    private val binding: SystemFragmentSystemBinding by viewbind()
+    override val baseCategoryViewModel: SystemViewModel by viewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.title = "体系"
+    }
 
-        val layoutManager = FlexboxLayoutManager(requireContext(), FlexDirection.ROW)
-
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.addItemDecoration(FlexboxItemDecoration(requireContext()).apply {
-            setDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.divider_empty_margin_small
-                )
-            )
-            setOrientation(FlexboxItemDecoration.VERTICAL)
-        })
-
-        viewModel.loadingViewVisible.observe(viewLifecycleOwner) {
-            binding.loadingView.isVisible = it
-        }
-
-        viewModel.topicList.observe(viewLifecycleOwner) {
-            binding.recyclerView.adapter = SystemAdapter(it)
-//            binding.recyclerView.setHasFixedSize(true)
-
-        }
+    override fun onTopicClick(wanTopicResponse: WanTopicResponse) {
+        ARouter.getInstance().build(PagePath.SYSTEM_ARTICLE_LIST)
+            .withParcelable(ExtraKey.TOPIC, wanTopicResponse)
+            .navigation()
     }
 }

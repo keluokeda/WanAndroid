@@ -64,6 +64,12 @@ interface WanApiService {
     suspend fun getSystemList(): WanBaseListResponse<WanTopicResponse>
 
     /**
+     * 导航
+     */
+    @GET("/navi/json")
+    suspend fun getNavigationTree(): WanBaseListResponse<WanNavigationResponse>
+
+    /**
      * 获取体系文章列表
      */
     @GET("/article/list/{page}/json")
@@ -183,6 +189,14 @@ interface WanApiService {
      */
     @GET("/user_article/list/{page}/json")
     suspend fun getSquareArticles(
+        @Path("page") page: Int
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
+    /**
+     * 问答
+     */
+    @GET("/wenda/list/{page}/json")
+    suspend fun getAnswers(
         @Path("page") page: Int
     ): WanBaseResponse<WanListResponse<WanArticleResponse>>
 

@@ -3,13 +3,16 @@ package com.ke.wanandroid.ui.main
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.mvvm.base.ui.FragmentViewPager2Adapter
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.FragmentBaseTabBinding
+import com.ke.wanandroid.ui.answer.AnswerFragment
 import com.ke.wanandroid.ui.home.HomeFragment
+import com.ke.wanandroid.ui.navigation.NavigationFragment
 import com.ke.wanandroid.ui.square.SquareFragment
 
 class MainFragment : BaseFragment(R.layout.fragment_base_tab) {
@@ -30,10 +33,14 @@ class MainFragment : BaseFragment(R.layout.fragment_base_tab) {
             }
         }
 
-        val titles = listOf("首页", "广场")
+        binding.tabLayout.tabMode = TabLayout.MODE_FIXED
+        val titles = listOf("首页", "广场", "问答", "导航")
 
         binding.viewPager.adapter =
-            FragmentViewPager2Adapter(this, listOf(HomeFragment(), SquareFragment()))
+            FragmentViewPager2Adapter(
+                this,
+                listOf(HomeFragment(), SquareFragment(), AnswerFragment(), NavigationFragment())
+            )
         binding.viewPager.offscreenPageLimit = titles.size
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]

@@ -8,19 +8,19 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class WanTopicResponse(
     @SerializedName("children")
-    val children:List<WanTopicResponse>,
+    val children: List<WanTopicResponse> = emptyList(),
     @SerializedName("courseId")
-    val courseId: Int,
+    val courseId: Int = 0,
     @SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("order")
-    val order: Int,
+    val order: Int = 0,
     @SerializedName("parentChapterId")
-    val parentChapterId: Int,
+    val parentChapterId: Int = 0,
     @SerializedName("userControlSetTop")
-    val userControlSetTop: Boolean,
+    val userControlSetTop: Boolean = false,
     @SerializedName("visible")
-    val visible: Int
+    val visible: Int = 0
 ) : Parcelable

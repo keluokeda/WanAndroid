@@ -21,13 +21,14 @@ import com.ke.wanandroid.common.bindArticle
 import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
+import com.ke.wanandroid.common.ui.article.ArticleAdapter
 
 abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(layoutId) {
 
     abstract val baseArticleListViewModel: BaseArticleListViewModel<*>
 
     protected val adapter by lazy {
-        ArticleListAdapter(::bindData).apply {
+        ArticleAdapter(::bindData).apply {
             setOnItemClickListener { _, _, position ->
 
                 ARouter.getInstance().build(PagePath.H5_ARTICLE)
@@ -88,13 +89,13 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
         holder.viewBinding.bindArticle(item, Glide.with(this))
     }
 
-    override fun <T> setupAdapter(
+    override fun <T> setRefreshAndLoadMore(
         swipeRefreshLayout: SwipeRefreshLayout,
         baseDataListViewModel: BaseDataListViewModel<*, T>,
         adapter: BaseQuickAdapter<T, *>,
         recyclerView: RecyclerView
     ) {
-        super.setupAdapter(swipeRefreshLayout, baseDataListViewModel, adapter, recyclerView)
+        super.setRefreshAndLoadMore(swipeRefreshLayout, baseDataListViewModel, adapter, recyclerView)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),

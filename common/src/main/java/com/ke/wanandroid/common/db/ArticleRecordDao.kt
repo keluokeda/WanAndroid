@@ -2,7 +2,6 @@ package com.ke.wanandroid.common.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.ke.wanandroid.common.model.ArticleRecord
 
 @Dao
 interface ArticleRecordDao {
@@ -18,4 +17,7 @@ interface ArticleRecordDao {
 
     @Query("delete from article_record")
     suspend fun deleteAll()
+
+    @Update
+    suspend fun update(articleRecord: ArticleRecord)
 }

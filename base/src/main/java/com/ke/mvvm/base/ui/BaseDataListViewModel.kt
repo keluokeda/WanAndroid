@@ -46,10 +46,8 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
         loadData()
     }
 
-    /**
-     * 重试
-     */
-    fun retry() {
+
+    override fun retry() {
         loadData(true)
     }
 
@@ -94,6 +92,7 @@ abstract class BaseDataListViewModel<Params, R>(private val baseDataListReposito
             _loadDataResult.value =
                 if (result.over) LOAD_DATA_RESULT_END else LOAD_DATA_RESULT_SUCCESS
         }
+        index++
     }
 
     /**

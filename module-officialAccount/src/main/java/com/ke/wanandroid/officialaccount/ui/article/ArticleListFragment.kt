@@ -40,7 +40,7 @@ class ArticleListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
     }
 

@@ -9,7 +9,7 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.db.ArticleRecordDao
-import com.ke.wanandroid.common.model.toRecord
+import com.ke.wanandroid.common.db.toRecord
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

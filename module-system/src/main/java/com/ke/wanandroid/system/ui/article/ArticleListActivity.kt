@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.ke.mvvm.base.ui.BaseActivity
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.R
+import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.const.PagePath
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +17,7 @@ class ArticleListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragment_container)
 
-        val topic = intent.getParcelableExtra<WanTopicResponse>(EXTRA_TOPIC)
+        val topic = intent.getParcelableExtra<WanTopicResponse>(ExtraKey.TOPIC)
             ?: throw RuntimeException("需要传入 topic")
 
         if (savedInstanceState == null) {
@@ -27,7 +28,5 @@ class ArticleListActivity : BaseActivity() {
         }
     }
 
-    companion object {
-        const val EXTRA_TOPIC = "EXTRA_TOPIC"
-    }
+
 }

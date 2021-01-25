@@ -16,8 +16,7 @@ sealed class UserInfo {
         val userIdMessage = "ID:$userId"
     }
 
-    object NoLogin : UserInfo() {
-    }
+    object NoLogin : UserInfo()
 
     val defaultIconSrc = R.drawable.mine_default_avatar
     val defaultBackgroundSrc = R.drawable.mine_header

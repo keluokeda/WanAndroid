@@ -6,7 +6,7 @@ import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanBannerResponse
 import com.ke.wanandroid.api.response.WanBaseListResponse
-import com.ke.wanandroid.common.getListResultWithTry
+import com.ke.wanandroid.common.getListResultFromWanResponse
 import com.ke.wanandroid.common.model.BaseArticleListRepository
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class HomeRepository @Inject constructor(private val wanApiService: WanApiServic
 
 
     override suspend fun getListResult(index: Int, params: Any): ListResult<WanArticleResponse> {
-        return getListResultWithTry {
+        return getListResultFromWanResponse {
             wanApiService.getArticleList(index)
         }
     }

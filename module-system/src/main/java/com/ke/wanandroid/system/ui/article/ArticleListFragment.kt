@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.api.response.WanTopicResponse
+import com.ke.wanandroid.common.const.ExtraKey
 import com.ke.wanandroid.common.ui.BaseArticleListFragment
 import com.ke.wanandroid.common.ui.BaseArticleListViewModel
 import com.ke.wanandroid.system.R
@@ -24,7 +24,7 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        val adapter = ArticleListAdapter()
-        setupAdapter(
+        setRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             viewModel,
             adapter,
@@ -32,7 +32,7 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
         )
 
         binding.toolbar.title =
-            requireArguments().getParcelable<WanTopicResponse>(ArticleListActivity.EXTRA_TOPIC)!!.name
+            requireArguments().getParcelable<WanTopicResponse>(ExtraKey.TOPIC)!!.name
 
         binding.toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
@@ -42,7 +42,7 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
     companion object {
         fun instance(wanTopicResponse: WanTopicResponse): ArticleListFragment {
             val fragment = ArticleListFragment()
-            fragment.arguments = bundleOf(ArticleListActivity.EXTRA_TOPIC to wanTopicResponse)
+            fragment.arguments = bundleOf(ExtraKey.TOPIC to wanTopicResponse)
             return fragment
         }
     }

@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.RequestManager
 import com.ke.mvvm.base.data.BaseDataListRepository
 import com.ke.mvvm.base.data.ListResult
+import com.ke.mvvm.base.domian.GetDataListUseCase
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanBaseResponse
 import com.ke.wanandroid.api.response.WanListResponse
@@ -16,7 +17,7 @@ fun String.log() {
     Logger.d(this)
 }
 
-suspend fun <P, R : Parcelable> BaseDataListRepository<P, R>.getListResultWithTry(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
+suspend fun <P, R : Parcelable> BaseDataListRepository<P, R>.getListResultFromWanResponse(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
     return try {
         getListResultFromWanBaseResponse(method.invoke())
     } catch (e: Exception) {
@@ -24,8 +25,11 @@ suspend fun <P, R : Parcelable> BaseDataListRepository<P, R>.getListResultWithTr
     }
 }
 
+suspend fun <P, R : Parcelable> GetDataListUseCase<P, R>.getListResultFromWanResponse(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
+    return getListResultFromWanBaseResponse(method.invoke())
+}
 
-fun <R : Parcelable> getListResultFromWanBaseResponse(
+private fun <R : Parcelable> getListResultFromWanBaseResponse(
     response: WanBaseResponse<WanListResponse<R>>
 ): ListResult<R> {
     return if (response.isSuccess) {
@@ -34,6 +38,7 @@ fun <R : Parcelable> getListResultFromWanBaseResponse(
         ListResult(errorMessage = response.errorMsg, canRetry = false)
     }
 }
+
 
 val nightModeList = listOf(
     AppCompatDelegate.MODE_NIGHT_UNSPECIFIED,
@@ -65,3 +70,5 @@ fun ItemArticleBinding.bindArticle(item: WanArticleResponse, requestManager: Req
     chapter.text = item.superChapterName + ":" + item.chapterName
     time.text = item.niceDate
 }
+
+

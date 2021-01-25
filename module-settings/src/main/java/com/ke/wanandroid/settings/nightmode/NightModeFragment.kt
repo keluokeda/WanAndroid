@@ -26,7 +26,7 @@ class NightModeFragment : BaseFragment(R.layout.settings_fragment_night_mode) {
             radioList[selectedIndex].isChecked = true
 
             radioList.forEachIndexed { index, materialRadioButton ->
-                materialRadioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+                materialRadioButton.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
                         AppCompatDelegate.setDefaultNightMode(nightModeList[index])
                     }

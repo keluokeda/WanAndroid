@@ -1,22 +1,23 @@
-package com.ke.wanandroid.system.ui.system
+package com.ke.wanandroid.common.ui.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.ke.wanandroid.api.response.WanTopicResponse
-import com.ke.wanandroid.common.const.PagePath
-import com.ke.wanandroid.system.R
-import com.ke.wanandroid.system.databinding.SystemItemChipBinding
-import com.ke.wanandroid.system.databinding.SystemItemTitleBinding
-import com.ke.wanandroid.system.ui.article.ArticleListActivity
+import com.ke.wanandroid.common.R
+import com.ke.wanandroid.common.databinding.ItemCategoryChipBinding
+import com.ke.wanandroid.common.databinding.ItemCategoryTitleBinding
 
-class SystemAdapter(private val list: List<WanTopicResponse>) :
+
+class CategoryAdapter(
+    private val list: List<WanTopicResponse>,
+    private val onClickListener: (WanTopicResponse) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == R.layout.system_item_title) {
+        if (viewType == R.layout.item_category_title) {
             return SystemTitleViewHolder(
-                SystemItemTitleBinding.inflate(
+                ItemCategoryTitleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -24,7 +25,7 @@ class SystemAdapter(private val list: List<WanTopicResponse>) :
             )
         } else {
             return SystemChipViewHolder(
-                SystemItemChipBinding.inflate(
+                ItemCategoryChipBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -35,15 +36,20 @@ class SystemAdapter(private val list: List<WanTopicResponse>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val topic = list[position]
-        if (getItemViewType(position) == R.layout.system_item_title) {
+        if (getItemViewType(position) == R.layout.item_category_title) {
             (holder as? SystemTitleViewHolder)?.bind(topic.name)
         } else {
-            (holder as? SystemChipViewHolder)?.bind(topic)
+            (holder as? SystemChipViewHolder)?.apply {
+                bind(topic)
+                binding.chip.setOnClickListener {
+                    onClickListener(topic)
+                }
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (list[position].children.isEmpty()) R.layout.system_item_chip else R.layout.system_item_title
+        return if (list[position].children.isEmpty()) R.layout.item_category_chip else R.layout.item_category_title
     }
 
     override fun getItemCount(): Int {
@@ -51,7 +57,7 @@ class SystemAdapter(private val list: List<WanTopicResponse>) :
     }
 }
 
-class SystemTitleViewHolder(private val binding: SystemItemTitleBinding) :
+class SystemTitleViewHolder(private val binding: ItemCategoryTitleBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(title: String) {
@@ -60,14 +66,11 @@ class SystemTitleViewHolder(private val binding: SystemItemTitleBinding) :
 
 }
 
-class SystemChipViewHolder(private val binding: SystemItemChipBinding) :
+class SystemChipViewHolder(internal val binding: ItemCategoryChipBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(topicResponse: WanTopicResponse) {
         binding.chip.text = topicResponse.name
-        binding.chip.setOnClickListener {
-            ARouter.getInstance().build(PagePath.SYSTEM_ARTICLE_LIST)
-                .withParcelable(ArticleListActivity.EXTRA_TOPIC, topicResponse).navigation()
-        }
+
     }
 }

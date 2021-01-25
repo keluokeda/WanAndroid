@@ -13,10 +13,5 @@ class ProjectArticlesViewModel @ViewModelInject constructor(
     override val params: Int
         get() = savedStateHandle.get<Int>("id") ?: throw RuntimeException("缺少id")
 
-    fun start() {
-        loadData(true)
-    }
 
-    init {
-    }
 }

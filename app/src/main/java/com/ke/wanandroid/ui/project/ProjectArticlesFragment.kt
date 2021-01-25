@@ -31,7 +31,7 @@ class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_ref
         super.onResume()
         if (isFirstResume) {
             isFirstResume = false
-            viewModel.start()
+            viewModel.refresh()
         }
     }
 
@@ -47,7 +47,7 @@ class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_ref
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setupAdapter(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
     }
 
