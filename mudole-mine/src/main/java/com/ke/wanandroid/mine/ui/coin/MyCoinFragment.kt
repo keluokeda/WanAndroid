@@ -1,5 +1,6 @@
 package com.ke.wanandroid.mine.ui.coin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,7 @@ class MyCoinFragment : BaseDataListFragment(R.layout.mine_fragment_my_coin) {
                 return MineItemCoinBinding.inflate(layoutInflater, parent, false)
             }
 
+            @SuppressLint("SetTextI18n")
             override fun convert(
                 holder: ViewBindingViewHolder<MineItemCoinBinding>,
                 item: WanCoinResponse
@@ -47,7 +49,7 @@ class MyCoinFragment : BaseDataListFragment(R.layout.mine_fragment_my_coin) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRefreshAndLoadMore(
+        setup(
             binding.swipeRefreshLayout,
             viewModel,
             adapter,

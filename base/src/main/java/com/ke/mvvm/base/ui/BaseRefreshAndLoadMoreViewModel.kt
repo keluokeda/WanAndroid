@@ -39,10 +39,10 @@ abstract class BaseRefreshAndLoadMoreViewModel<P, R>(private val getDataListUseC
 
 
     open fun refresh() {
-        loadData()
+        loadData(true)
     }
 
-    protected fun loadData(forceRefresh: Boolean = false) {
+    protected open fun loadData(forceRefresh: Boolean = false) {
 
         viewModelScope.launch {
             if (forceRefresh) {
@@ -56,7 +56,7 @@ abstract class BaseRefreshAndLoadMoreViewModel<P, R>(private val getDataListUseC
                 val currentList =
                     _dataList.value ?: emptyList()
                 _dataList.value =
-                    result.list + if (forceRefresh) emptyList() else currentList
+                    (if (forceRefresh) emptyList() else currentList) + result.list
                 currentIndex++
                 _loadDataResult.value =
                     if (result.over) LOAD_DATA_RESULT_END else LOAD_DATA_RESULT_SUCCESS

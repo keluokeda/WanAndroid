@@ -5,13 +5,25 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.const.ExtraKey
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.domain.CancelCollectArticleUseCase
+import com.ke.wanandroid.common.domain.CollectArticleUseCase
+import com.ke.wanandroid.common.domain.laterread.AddToLaterReadListUseCase
+import com.ke.wanandroid.common.ui.article.BaseArticleListViewModel
+import com.ke.wanandroid.system.domain.GetSystemArticlesUseCase
 
 class ArticleListViewModel @ViewModelInject constructor(
-    articleListRepository: ArticleListRepository,
-    @Assisted savedStateHandle: SavedStateHandle
+    @Assisted savedStateHandle: SavedStateHandle,
+    getSystemArticlesUseCase: GetSystemArticlesUseCase,
+    collectArticleUseCase: CollectArticleUseCase,
+    cancelCollectArticleUseCase: CancelCollectArticleUseCase,
+    addToLaterReadListUseCase: AddToLaterReadListUseCase
 ) :
-    BaseArticleListViewModel<Int>(articleListRepository) {
+    BaseArticleListViewModel<Int>(
+        getSystemArticlesUseCase,
+        collectArticleUseCase,
+        cancelCollectArticleUseCase,
+        addToLaterReadListUseCase
+    ) {
 
     override val startIndex: Int
         get() = 0
@@ -22,6 +34,8 @@ class ArticleListViewModel @ViewModelInject constructor(
         loadData(true)
     }
 
-    override val params: Int
+    override val parameters: Int
         get() = id
+
+
 }

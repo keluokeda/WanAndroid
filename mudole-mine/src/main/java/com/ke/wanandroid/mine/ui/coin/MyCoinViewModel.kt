@@ -5,13 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
-import com.ke.mvvm.base.ui.BaseDataListViewModel
+import com.ke.mvvm.base.ui.BaseRefreshAndLoadMoreViewModel
 import com.ke.wanandroid.api.response.WanCoinResponse
+import com.ke.wanandroid.mine.domain.coin.GetUserCoinCountUseCase
+import com.ke.wanandroid.mine.domain.coin.GetUserCoinRecordsUseCase
 import kotlinx.coroutines.launch
 
-class MyCoinViewModel @ViewModelInject constructor(private val myCoinRepository: MyCoinRepository) :
-    BaseDataListViewModel<Any, WanCoinResponse>(myCoinRepository) {
-    override val params = 0
+class MyCoinViewModel @ViewModelInject constructor(
+    private val getUserCoinCountUseCase: GetUserCoinCountUseCase,
+     getUserCoinRecordsUseCase: GetUserCoinRecordsUseCase
+) :
+    BaseRefreshAndLoadMoreViewModel<Unit, WanCoinResponse>(getUserCoinRecordsUseCase) {
+
 
     init {
         loadData(true)
@@ -30,13 +35,12 @@ class MyCoinViewModel @ViewModelInject constructor(private val myCoinRepository:
 
     private fun loadCoinCount() {
         viewModelScope.launch {
-            val result = myCoinRepository.getCoinCount()
 
-            when (result) {
+            when (val result = getUserCoinCountUseCase(Unit)) {
                 is Result.Success -> {
-                    if (result.data.isSuccess) {
-                        _coinCount.value = result.data.requireData().toString()
-                    }
+
+                    _coinCount.value = result.data.toString()
+
                 }
                 is Result.Error -> {
 
@@ -44,4 +48,7 @@ class MyCoinViewModel @ViewModelInject constructor(private val myCoinRepository:
             }
         }
     }
+
+    override val parameters: Unit
+        get() = Unit
 }

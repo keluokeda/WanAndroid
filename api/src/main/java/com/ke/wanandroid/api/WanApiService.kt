@@ -11,8 +11,8 @@ interface WanApiService {
     @FormUrlEncoded
     @POST("/user/login")
     suspend fun login(
-        @Field("username") userName: String,
-        @Field("password") passWord: String
+        @Field("username") username: String,
+        @Field("password") password: String
     ): WanBaseResponse<WanLoginResponse>
 
     /**
@@ -21,9 +21,9 @@ interface WanApiService {
     @FormUrlEncoded
     @POST("/user/register")
     suspend fun register(
-        @Field("username") userName: String,
-        @Field("password") passWord: String,
-        @Field("repassword") rePassWord: String
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("repassword") rePassword: String
     ): WanBaseResponse<WanLoginResponse>
 
     /**

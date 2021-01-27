@@ -3,6 +3,7 @@ package com.ke.wanandroid.common.di
 import android.content.Context
 import androidx.room.Room
 import com.ke.wanandroid.common.db.ArticleRecordDao
+import com.ke.wanandroid.common.db.LaterReadDao
 import com.ke.wanandroid.common.db.WanAndroidDataBase
 import dagger.Module
 import dagger.Provides
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object  WanAndroidDataBaseModule {
+object WanAndroidDataBaseModule {
 
     @Provides
     @Singleton
@@ -25,4 +26,8 @@ object  WanAndroidDataBaseModule {
     @Provides
     fun provideArticleRecordDao(wanAndroidDataBase: WanAndroidDataBase): ArticleRecordDao =
         wanAndroidDataBase.articleRecordDao()
+
+    @Provides
+    fun provideLaterReadDao(wanAndroidDataBase: WanAndroidDataBase): LaterReadDao =
+        wanAndroidDataBase.laterReadDao()
 }

@@ -10,8 +10,9 @@ class GetAllArticleRecordsUseCase @Inject constructor(
     private val articleRecordRepository: ArticleRecordRepository
 ) :
     LiveDataUseCase<Unit, List<ArticleRecord>> {
-    override fun execute(params: Unit): LiveData<List<ArticleRecord>> {
+    override fun invoke(parameters: Unit): LiveData<List<ArticleRecord>> {
         return articleRecordRepository.articleRecords
     }
+
 
 }

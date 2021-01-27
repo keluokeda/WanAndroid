@@ -29,7 +29,7 @@ class ArticleRecordsViewModel @ViewModelInject constructor(
 ) :
     BaseListViewModel<ArticleRecord>() {
     override val dataList: LiveData<List<ArticleRecord>>
-        get() = getAllArticleRecordsUseCase.execute(Unit)
+        get() = getAllArticleRecordsUseCase(Unit)
 
     fun deleteAll() {
         viewModelScope.launch {

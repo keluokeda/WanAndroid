@@ -5,19 +5,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
+import com.ke.mvvm.base.data.successOr
 import com.ke.mvvm.base.livedata.SingleLiveEvent
 import com.ke.mvvm.base.ui.BaseViewModel
-import com.ke.wanandroid.common.data.UserDataStore
+import com.ke.wanandroid.common.domain.IsUserLoginUseCase
 import com.ke.wanandroid.common.event.EventBus
 import com.ke.wanandroid.common.event.UserLoginEvent
+import com.ke.wanandroid.mine.domain.mine.*
 import com.ke.wanandroid.mine.model.UserInfo
 import io.reactivex.rxkotlin.addTo
 import kotlinx.coroutines.launch
 
 class MineViewModel @ViewModelInject constructor(
-    private val mineRepository: MineRepository,
-    private val userDataStore: UserDataStore,
-    private val eventBus: EventBus
+    private val isUserLoginUseCase: IsUserLoginUseCase,
+    private val getLocalUserInfoUseCase: GetLocalUserInfoUseCase,
+    private val getRemoteUserInfoUseCase: GetRemoteUserInfoUseCase,
+    private val saveUserInfoToLocalUseCase: SaveUserInfoToLocalUseCase,
+    private val saveUserAvatarImagePathUseCase: SaveUserAvatarImagePathUseCase,
+    private val saveMineHeaderImagePathUseCase: SaveMineHeaderImagePathUseCase,
+    eventBus: EventBus
 ) :
     BaseViewModel() {
     private val _isRefreshing = MutableLiveData<Boolean>()
@@ -48,62 +54,72 @@ class MineViewModel @ViewModelInject constructor(
 
         eventBus.toObservable(UserLoginEvent::class.java)
             .subscribe {
-                _refreshEnable.value = userDataStore.isLogin
                 refresh()
             }.addTo(compositeDisposable)
     }
 
+
+
     private fun refreshFromLocal() {
-        _userInfo.value = mineRepository.getUserInfoFromLocal()
+        viewModelScope.launch {
+            _userInfo.value = getLocalUserInfoUseCase(Unit).successOr(UserInfo.NoLogin)
+        }
     }
 
     fun avatarClicked() {
-        if (userDataStore.isLogin) {
-            _event.value = EVENT_PICK_AVATAR
-        } else {
-            _event.value = EVENT_TO_LOGIN
+        viewModelScope.launch {
+            if (isUserLoginUseCase(Unit).successOr(false)) {
+                _event.value = EVENT_PICK_AVATAR
+            } else {
+                _event.value = EVENT_TO_LOGIN
+            }
         }
+
     }
 
-    fun nameClicked() {
-        if (userDataStore.isLogin) {
-            return
-        }
-        _event.value = EVENT_TO_LOGIN
-    }
+
 
     fun headerClicked() {
-        if (userDataStore.isLogin) {
-            _event.value = EVENT_PICK_BACKGROUND
+        viewModelScope.launch {
+            if (isUserLoginUseCase(Unit).successOr(false)) {
+                _event.value = EVENT_PICK_BACKGROUND
+            }
         }
+
     }
 
     fun setUserIconImagePath(path: String?) {
         if (path == null) {
             return
         }
-        mineRepository.setUserIconImagePath(path)
-        refreshFromLocal()
+        viewModelScope.launch {
+            _userInfo.value = saveUserAvatarImagePathUseCase(path).successOr(UserInfo.NoLogin)
+        }
+
     }
 
     fun setHeaderImageUri(path: String?) {
-        if (path != null) {
-            mineRepository.setMeHeaderBackgroundImagePath(path)
-            refreshFromLocal()
+        if (path == null) {
+            return
         }
+        viewModelScope.launch {
+            _userInfo.value = saveMineHeaderImagePathUseCase(path).successOr(UserInfo.NoLogin)
+        }
+
     }
 
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            val result = mineRepository.getUserInfoFromWebService()
+            val result = getRemoteUserInfoUseCase(Unit)
             _isRefreshing.value = false
             when (result) {
                 is Result.Success -> {
                     if (result.data.isSuccess) {
                         //成功获取到用户数据
-                        mineRepository.saveUserInfoToLocal(result.data.requireData())
-                        refreshFromLocal()
+
+                        _userInfo.value =
+                            saveUserInfoToLocalUseCase(result.data.requireData()).successOr(UserInfo.NoLogin)
                     }
 
                 }

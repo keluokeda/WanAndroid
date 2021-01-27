@@ -26,9 +26,7 @@ abstract class BaseCategoryViewModel(private val categoryRepository: BaseCategor
             _loadingViewVisible.value = true
             _retryViewVisible.value = false
 
-            val result = categoryRepository.getCategoryList()
-
-            when (result) {
+            when (val result = categoryRepository.getCategoryList()) {
                 is Result.Success -> {
                     _topicList.value = result.data
                     _loadingViewVisible.value = false

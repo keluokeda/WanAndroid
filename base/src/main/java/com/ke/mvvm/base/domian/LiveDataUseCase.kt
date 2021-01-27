@@ -4,6 +4,6 @@ import androidx.lifecycle.LiveData
 
 interface LiveDataUseCase<P, R> {
 
-    fun execute(params: P): LiveData<R>
+    operator fun invoke(parameters: P): LiveData<R>
 
 }

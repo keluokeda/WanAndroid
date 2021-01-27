@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.domain.CancelCollectArticleUseCase
 import com.ke.wanandroid.common.domain.CollectArticleUseCase
+import com.ke.wanandroid.common.domain.laterread.AddToLaterReadListUseCase
 import com.ke.wanandroid.common.ui.article.BaseArticleListViewModel
 import com.ke.wanandroid.mine.domain.collection.CancelCollectMyArticleUseCase
 import com.ke.wanandroid.mine.domain.collection.GetAllCollectionsUseCase
@@ -14,12 +15,14 @@ open class MyCollectionsViewModel @ViewModelInject constructor(
     getAllCollectionsUseCase: GetAllCollectionsUseCase,
     collectArticleUseCase: CollectArticleUseCase,
     cancelCollectArticleUseCase: CancelCollectArticleUseCase,
-    private val cancelCollectMyArticleUseCase: CancelCollectMyArticleUseCase
+    private val cancelCollectMyArticleUseCase: CancelCollectMyArticleUseCase,
+    addToLaterReadListUseCase: AddToLaterReadListUseCase
 ) :
     BaseArticleListViewModel<Unit>(
         getAllCollectionsUseCase,
         collectArticleUseCase,
-        cancelCollectArticleUseCase
+        cancelCollectArticleUseCase,
+        addToLaterReadListUseCase
     ) {
 
     override val parameters: Unit

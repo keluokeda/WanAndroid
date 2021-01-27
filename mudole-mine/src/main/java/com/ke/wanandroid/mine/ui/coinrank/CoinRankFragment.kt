@@ -53,7 +53,7 @@ class CoinRankFragment : BaseDataListFragment(R.layout.mine_fragment_coin_rank) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setup(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }

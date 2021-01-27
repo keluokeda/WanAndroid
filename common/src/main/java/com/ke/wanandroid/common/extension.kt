@@ -67,7 +67,8 @@ fun ItemArticleBinding.bindArticle(item: WanArticleResponse, requestManager: Req
     desc.isVisible = item.desc.isNotEmpty()
     title.maxLines = if (item.desc.isNotEmpty()) 1 else 3
     desc.text = item.desc
-    chapter.text = item.superChapterName + ":" + item.chapterName
+    chapter.text =
+        if (item.superChapterName.isNotEmpty()) item.superChapterName + ":" else   item.chapterName
     time.text = item.niceDate
 }
 

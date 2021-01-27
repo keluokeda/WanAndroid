@@ -5,20 +5,36 @@ import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
 import com.ke.mvvm.base.model.SnackbarAction
 import com.ke.wanandroid.api.response.WanArticleResponse
+import com.ke.wanandroid.common.domain.CancelCollectArticleUseCase
+import com.ke.wanandroid.common.domain.CollectArticleUseCase
+import com.ke.wanandroid.common.domain.laterread.AddToLaterReadListUseCase
 import com.ke.wanandroid.common.event.EventBus
 import com.ke.wanandroid.common.event.UserShareArticleEvent
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListViewModel
+import com.ke.wanandroid.mine.domain.sharedarticles.DeleteMySharedArticleUseCase
+import com.ke.wanandroid.mine.domain.sharedarticles.GetMySharedArticlesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import kotlinx.coroutines.launch
 
 class MyShareArticleViewModel @ViewModelInject constructor(
-    private val myShareArticlesRepository: MyShareArticlesRepository,
-    eventBus: EventBus
+    eventBus: EventBus,
+    getMySharedArticlesUseCase: GetMySharedArticlesUseCase,
+    collectArticleUseCase: CollectArticleUseCase,
+    cancelCollectArticleUseCase: CancelCollectArticleUseCase,
+    private val deleteMySharedArticleUseCase: DeleteMySharedArticleUseCase,
+    addToLaterReadListUseCase: AddToLaterReadListUseCase
 ) :
-    BaseArticleListViewModel<Any>(myShareArticlesRepository) {
-    override val params: Any
-        get() = 0
+    BaseArticleListViewModel<Unit>(
+        getMySharedArticlesUseCase,
+        collectArticleUseCase,
+        cancelCollectArticleUseCase,
+        addToLaterReadListUseCase
+    ) {
+
+
+    override val parameters: Unit
+        get() = Unit
 
     init {
         loadData(true)
@@ -32,9 +48,8 @@ class MyShareArticleViewModel @ViewModelInject constructor(
 
     fun deleteMyShareArticle(article: WanArticleResponse) {
         viewModelScope.launch {
-            val result = myShareArticlesRepository.deleteArticle(article)
 
-            when (result) {
+            when (val result = deleteMySharedArticleUseCase(article.id)) {
                 is Result.Success -> {
                     if (result.data.isSuccess) {
                         val list = _dataList.value ?: return@launch

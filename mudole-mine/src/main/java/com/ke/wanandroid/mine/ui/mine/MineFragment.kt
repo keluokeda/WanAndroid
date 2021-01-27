@@ -44,13 +44,15 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             }
             coinRank.setOnClickListener {
                 ARouter.getInstance().build(PagePath.COIN_RANK).navigation()
-
             }
             myCollection.setOnClickListener {
                 ARouter.getInstance().build(PagePath.MY_COLLECTIONS).navigation()
             }
             myShare.setOnClickListener {
                 ARouter.getInstance().build(PagePath.MY_SHARE_ARTICLES).navigation()
+            }
+            laterRead.setOnClickListener {
+                ARouter.getInstance().build(PagePath.LATER_READ).navigation()
             }
             history.setOnClickListener {
                 ARouter.getInstance().build(PagePath.ARTICLE_RECORDS).navigation()

@@ -54,6 +54,8 @@ class ArticleRecordsFragment : BaseFragment(R.layout.layout_base_list) {
 
         }
 
+        binding.swipeRefreshLayout.isEnabled = false
+
         adapter.setDiffCallback(object : DiffUtil.ItemCallback<ArticleRecord>() {
             override fun areItemsTheSame(oldItem: ArticleRecord, newItem: ArticleRecord): Boolean {
                 return oldItem.id == newItem.id

@@ -11,6 +11,7 @@
         <activity android:name=".ui.myshare.MyShareArticlesActivity" />
         <activity android:name=".ui.sharearticle.ShareArticleActivity" />
         <activity android:name=".ui.record.ArticleRecordsActivity" />
+        <activity android:name=".ui.laterread.LaterReadActivity" />
     </application>
 
 </manifest>

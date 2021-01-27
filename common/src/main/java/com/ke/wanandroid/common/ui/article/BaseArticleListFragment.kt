@@ -60,7 +60,7 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
         } else {
             menu.add(0, ITEM_ID_COLLECT, 0, "收藏")
         }
-        menu.add(0, ITEM_ID_LATE_READ, 0, "稍后阅读")
+        menu.add(0, ITEM_ID_LATER_READ, 0, "添加至稍后阅读")
 
     }
 
@@ -72,6 +72,9 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
             }
             ITEM_ID_CANCEL_COLLECT -> {
                 articleListViewModel.cancelCollectArticle(article)
+            }
+            ITEM_ID_LATER_READ -> {
+                articleListViewModel.addToLaterRead(article)
             }
             else -> {
             }
@@ -103,6 +106,6 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
     companion object {
         private const val ITEM_ID_COLLECT = 1
         private const val ITEM_ID_CANCEL_COLLECT = 2
-        private const val ITEM_ID_LATE_READ = 3
+        private const val ITEM_ID_LATER_READ = 3
     }
 }

@@ -10,18 +10,19 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanBaseResponse
 import com.ke.wanandroid.common.domain.CancelCollectArticleUseCase
 import com.ke.wanandroid.common.domain.CollectArticleUseCase
+import com.ke.wanandroid.common.domain.laterread.AddToLaterReadListUseCase
 import kotlinx.coroutines.launch
 
 abstract class BaseArticleListViewModel<P>(
-    private val getDataListUseCase: GetDataListUseCase<P, WanArticleResponse>,
+    getDataListUseCase: GetDataListUseCase<P, WanArticleResponse>,
     private val collectArticleUseCase: CollectArticleUseCase,
-    private val cancelCollectArticleUseCase: CancelCollectArticleUseCase
+    private val cancelCollectArticleUseCase: CancelCollectArticleUseCase,
+    private val addToLaterReadListUseCase: AddToLaterReadListUseCase
 ) :
     BaseRefreshAndLoadMoreViewModel<P, WanArticleResponse>(getDataListUseCase) {
     fun collectArticle(wanArticleResponse: WanArticleResponse) {
         viewModelScope.launch {
-            val result = collectArticleUseCase.invoke(wanArticleResponse.id)
-            when (result) {
+            when (val result = collectArticleUseCase.invoke(wanArticleResponse.id)) {
                 is Result.Success -> {
                     val message = if (result.data.isSuccess) {
                         wanArticleResponse.collect = true
@@ -74,5 +75,12 @@ abstract class BaseArticleListViewModel<P>(
         }
     }
 
+
+    fun addToLaterRead(wanArticleResponse: WanArticleResponse) {
+        viewModelScope.launch {
+            addToLaterReadListUseCase(wanArticleResponse)
+            _snackbarEvent.value = SnackbarAction(message = "添加成功")
+        }
+    }
 
 }

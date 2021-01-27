@@ -9,10 +9,11 @@ import com.ke.mvvm.base.model.SnackbarAction
 import com.ke.mvvm.base.ui.BaseViewModel
 import com.ke.wanandroid.common.event.EventBus
 import com.ke.wanandroid.common.event.UserShareArticleEvent
+import com.ke.wanandroid.mine.domain.sharedarticles.ShareArticleUseCase
 import kotlinx.coroutines.launch
 
 class ShareArticleViewModel @ViewModelInject constructor(
-    private val shareArticleRepository: ShareArticleRepository,
+    private val shareArticleUseCase: ShareArticleUseCase,
     private val eventBus: EventBus
 ) :
     BaseViewModel() {
@@ -26,7 +27,7 @@ class ShareArticleViewModel @ViewModelInject constructor(
     fun shareArticle(title: String, link: String) {
         viewModelScope.launch {
             _loadingViewVisible.value = true
-            val result = shareArticleRepository.shareArticle(title, link)
+            val result = shareArticleUseCase(title to link)
             _loadingViewVisible.value = false
             when (result) {
                 is Result.Success -> {
@@ -38,10 +39,9 @@ class ShareArticleViewModel @ViewModelInject constructor(
                     }
                 }
                 is Result.Error -> {
-                    _snackbarEvent.value =
-                        SnackbarAction(message = "发生了一些错误，需要重试吗？", actionName = "重试") {
-                            shareArticle(title, link)
-                        }
+                    showRetrySnackBar {
+                        shareArticle(title, link)
+                    }
                 }
             }
         }

@@ -7,8 +7,7 @@ import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.const.ExtraKey
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
 import com.ke.wanandroid.system.R
 import com.ke.wanandroid.system.databinding.SystemFragmentArticleListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,17 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_article_list) {
 
     private val binding: SystemFragmentArticleListBinding by viewbind()
-    private val viewModel: ArticleListViewModel by viewModels()
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
+    override val articleListViewModel: ArticleListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val adapter = ArticleListAdapter()
-        setRefreshAndLoadMore(
+        setup(
             binding.swipeRefreshLayout,
-            viewModel,
-            adapter,
+            articleListViewModel,
+            articleAdapter,
             binding.recyclerView
         )
 
@@ -37,6 +33,8 @@ class ArticleListFragment : BaseArticleListFragment(R.layout.system_fragment_art
         binding.toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
+
+        setupSnackbar(articleListViewModel)
     }
 
     companion object {
