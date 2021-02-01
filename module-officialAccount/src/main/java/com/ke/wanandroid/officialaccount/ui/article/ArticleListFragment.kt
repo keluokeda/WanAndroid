@@ -12,8 +12,7 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,25 +32,31 @@ class ArticleListFragment :
     }
 
     private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
-    private val viewModel: ArticleListViewModel by viewModels()
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
+
+    override val articleListViewModel: ArticleListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
+//        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
+        setup(
+            binding.swipeRefreshLayout,
+            articleListViewModel,
+            articleAdapter,
+            binding.recyclerView
+        )
+        setupSnackbar(articleListViewModel)
     }
 
     fun setKeyWord(keyword: String) {
-        viewModel.keyword = keyword
+        articleListViewModel.keyword = keyword
     }
 
     override fun onResume() {
         super.onResume()
         if (isFirstResume) {
-            viewModel.keyword = null
+            articleListViewModel.keyword = null
             isFirstResume = false
         }
     }

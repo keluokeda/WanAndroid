@@ -6,8 +6,8 @@ import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,8 +17,7 @@ class SquareFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
 
 
     private val viewModel: SquareViewModel by viewModels()
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
+    override val articleListViewModel: SquareViewModel by viewModels()
 
     private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
 
@@ -35,11 +34,12 @@ class SquareFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setRefreshAndLoadMore(
+        setup(
             binding.swipeRefreshLayout,
             viewModel,
-            adapter,
+            articleAdapter,
             binding.recyclerView
         )
+        setupSnackbar(articleListViewModel)
     }
 }

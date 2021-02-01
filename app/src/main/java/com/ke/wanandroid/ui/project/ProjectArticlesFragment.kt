@@ -11,19 +11,16 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
+class ProjectArticlesFragment :
+    BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
 
     private var isFirstResume = true
 
-    private val viewModel: ProjectArticlesViewModel by viewModels()
-
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
+    override val articleListViewModel: ProjectArticlesViewModel by viewModels()
 
     private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
 
@@ -31,7 +28,7 @@ class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_ref
         super.onResume()
         if (isFirstResume) {
             isFirstResume = false
-            viewModel.refresh()
+            articleListViewModel.refresh()
         }
     }
 
@@ -46,8 +43,15 @@ class ProjectArticlesFragment : BaseArticleListFragment(R.layout.layout_base_ref
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
+        setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
+        setup(
+            binding.swipeRefreshLayout,
+            articleListViewModel,
+            articleAdapter,
+            binding.recyclerView
+        )
+
+        setupSnackbar(articleListViewModel)
 
     }
 

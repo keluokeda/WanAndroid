@@ -1,15 +1,16 @@
-package com.ke.wanandroid.settings.nightmode
+package com.ke.wanandroid.settings.ui.nightmode
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
-import com.ke.wanandroid.common.nightModeList
 import com.ke.wanandroid.settings.R
 import com.ke.wanandroid.settings.databinding.SettingsFragmentNightModeBinding
+import com.ke.wanandroid.settings.model.NightMode
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NightModeFragment : BaseFragment(R.layout.settings_fragment_night_mode) {
 
 
@@ -18,17 +19,25 @@ class NightModeFragment : BaseFragment(R.layout.settings_fragment_night_mode) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            val selectedIndex = nightModeList.indexOf(AppCompatDelegate.getDefaultNightMode())
-            val radioList =
-                listOf(modeDefault, modeNight, modeDay, modeAutoBattery, modeFollowSystem)
+        val viewModel: NightModeViewModel by viewModels()
 
-            radioList[selectedIndex].isChecked = true
+        binding.apply {
+            val modeList = NightMode.values()
+
+            val radioList =
+                listOf(modeFollowSystem, modeNight, modeDay, modeAutoBattery)
+
+            viewModel.nightMode.observe(viewLifecycleOwner) {
+                val selectedIndex = modeList.indexOf(it)
+                radioList[selectedIndex].isChecked = true
+            }
 
             radioList.forEachIndexed { index, materialRadioButton ->
+                val mode = modeList[index]
+                materialRadioButton.text = mode.showName
                 materialRadioButton.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
-                        AppCompatDelegate.setDefaultNightMode(nightModeList[index])
+                        viewModel.setNightMode(mode)
                     }
                 }
             }

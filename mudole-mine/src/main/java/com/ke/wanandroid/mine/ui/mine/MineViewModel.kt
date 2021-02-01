@@ -11,6 +11,7 @@ import com.ke.mvvm.base.ui.BaseViewModel
 import com.ke.wanandroid.common.domain.IsUserLoginUseCase
 import com.ke.wanandroid.common.event.EventBus
 import com.ke.wanandroid.common.event.UserLoginEvent
+import com.ke.wanandroid.common.event.UserLogoutEvent
 import com.ke.wanandroid.mine.domain.mine.*
 import com.ke.wanandroid.mine.model.UserInfo
 import io.reactivex.rxkotlin.addTo
@@ -54,15 +55,21 @@ class MineViewModel @ViewModelInject constructor(
 
         eventBus.toObservable(UserLoginEvent::class.java)
             .subscribe {
-                refresh()
+                refreshLoginUser()
+            }.addTo(compositeDisposable)
+
+        eventBus.toObservable(UserLogoutEvent::class.java)
+            .subscribe {
+                refreshFromLocal()
             }.addTo(compositeDisposable)
     }
 
 
-
     private fun refreshFromLocal() {
         viewModelScope.launch {
-            _userInfo.value = getLocalUserInfoUseCase(Unit).successOr(UserInfo.NoLogin)
+            val result = getLocalUserInfoUseCase(Unit).successOr(UserInfo.NoLogin)
+            _userInfo.value = result
+            _refreshEnable.value = result is UserInfo.LoginUser
         }
     }
 
@@ -76,7 +83,6 @@ class MineViewModel @ViewModelInject constructor(
         }
 
     }
-
 
 
     fun headerClicked() {
@@ -108,7 +114,7 @@ class MineViewModel @ViewModelInject constructor(
 
     }
 
-    fun refresh() {
+    fun refreshLoginUser() {
         viewModelScope.launch {
             _isRefreshing.value = true
             val result = getRemoteUserInfoUseCase(Unit)

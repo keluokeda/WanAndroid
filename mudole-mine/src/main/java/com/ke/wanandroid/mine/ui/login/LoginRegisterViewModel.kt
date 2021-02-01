@@ -7,11 +7,11 @@ import com.ke.mvvm.base.data.Result
 import com.ke.mvvm.base.livedata.SingleLiveEvent
 import com.ke.mvvm.base.model.SnackbarAction
 import com.ke.mvvm.base.ui.BaseViewModel
+import com.ke.wanandroid.common.domain.SetUserLoginStateUseCase
 import com.ke.wanandroid.common.event.EventBus
 import com.ke.wanandroid.common.event.UserLoginEvent
 import com.ke.wanandroid.mine.domain.login.LoginUseCase
 import com.ke.wanandroid.mine.domain.login.RegisterUseCase
-import com.ke.wanandroid.mine.domain.login.SetUserLoginStateUseCase
 import kotlinx.coroutines.launch
 
 class LoginRegisterViewModel @ViewModelInject constructor(

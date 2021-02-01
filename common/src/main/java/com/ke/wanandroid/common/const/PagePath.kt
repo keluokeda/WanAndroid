@@ -34,5 +34,7 @@ class PagePath private constructor() {
         const val ARTICLE_RECORDS = "/mine/articleRecords"
 
         const val LATER_READ = "/mine/laterRead"
+
+        const val TOPIC_SORT = "/topic/sort"
     }
 }

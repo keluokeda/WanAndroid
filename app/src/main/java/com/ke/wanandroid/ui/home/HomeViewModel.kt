@@ -1,49 +1,36 @@
 package com.ke.wanandroid.ui.home
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.ke.mvvm.base.ui.BaseViewModel
-import com.ke.wanandroid.api.response.WanArticleResponse
-import com.ke.wanandroid.api.response.WanBannerResponse
-import kotlinx.coroutines.launch
-import com.ke.mvvm.base.data.Result
-import com.ke.mvvm.base.ui.BaseDataListViewModel
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import java.lang.Exception
+import com.ke.wanandroid.common.domain.CancelCollectArticleUseCase
+import com.ke.wanandroid.common.domain.CollectArticleUseCase
+import com.ke.wanandroid.common.domain.laterread.AddToLaterReadListUseCase
+import com.ke.wanandroid.common.ui.article.BaseArticleListViewModel
+import com.ke.wanandroid.domain.home.GetHomeArticlesUseCase
 
 
 class HomeViewModel @ViewModelInject constructor(
-    private val homeRepository: HomeRepository
+    getHomeArticlesUseCase: GetHomeArticlesUseCase,
+    collectArticleUseCase: CollectArticleUseCase,
+    cancelCollectArticleUseCase: CancelCollectArticleUseCase,
+    addToLaterReadListUseCase: AddToLaterReadListUseCase
 ) :
-    BaseArticleListViewModel<Any>(homeRepository) {
+    BaseArticleListViewModel<Unit>(
+        getHomeArticlesUseCase,
+        collectArticleUseCase,
+        cancelCollectArticleUseCase,
+        addToLaterReadListUseCase
+    ) {
 
 
-    override val params: Any
-        get() = 0
+    override val parameters: Unit
+        get() = Unit
     override val startIndex: Int
         get() = 0
-    private val _bannerData = MutableLiveData<List<WanBannerResponse>>()
 
-    val bannerData: LiveData<List<WanBannerResponse>>
-        get() = _bannerData
 
 
     init {
         loadData(true)
-    }
-
-
-
-    override fun loadData(forceRefresh: Boolean) {
-        super.loadData(forceRefresh)
-        viewModelScope.launch {
-            val result = homeRepository.getBannerData()
-            if (result is Result.Success) {
-                _bannerData.value = result.data.data
-            }
-        }
     }
 
 

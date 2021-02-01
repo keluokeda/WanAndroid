@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".nightmode.NightModeFragment">
+    tools:context=".ui.nightmode.NightModeFragment">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -22,9 +22,9 @@
         android:paddingStart="16dp">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/mode_default"
+            android:id="@+id/mode_follow_system"
             style="@style/settings_StyleNightModeRadioButton"
-            android:text="默认" />
+            android:text="跟随系统" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/mode_night"
@@ -42,10 +42,7 @@
             style="@style/settings_StyleNightModeRadioButton"
             android:text="根据电量自动开启或关闭深色模式" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/mode_follow_system"
-            style="@style/settings_StyleNightModeRadioButton"
-            android:text="跟随系统" />
+
 
     </RadioGroup>
 </LinearLayout>

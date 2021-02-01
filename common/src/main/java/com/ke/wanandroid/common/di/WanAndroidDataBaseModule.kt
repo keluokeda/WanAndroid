@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.ke.wanandroid.common.db.ArticleRecordDao
 import com.ke.wanandroid.common.db.LaterReadDao
+import com.ke.wanandroid.common.db.TopicDao
 import com.ke.wanandroid.common.db.WanAndroidDataBase
 import dagger.Module
 import dagger.Provides
@@ -30,4 +31,8 @@ object WanAndroidDataBaseModule {
     @Provides
     fun provideLaterReadDao(wanAndroidDataBase: WanAndroidDataBase): LaterReadDao =
         wanAndroidDataBase.laterReadDao()
+
+    @Provides
+    fun provideTopicDao(wanAndroidDataBase: WanAndroidDataBase): TopicDao =
+        wanAndroidDataBase.topicDao()
 }

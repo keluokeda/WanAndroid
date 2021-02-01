@@ -22,4 +22,7 @@ abstract class CommonModule {
 
     @Binds
     abstract fun bindLaterReadRepository(laterReadRepositoryImpl: LaterReadRepositoryImpl): LaterReadRepository
+
+    @Binds
+    abstract fun bindTopicsRepository(topicsRepository: TopicsRepositoryImpl): TopicsRepository
 }

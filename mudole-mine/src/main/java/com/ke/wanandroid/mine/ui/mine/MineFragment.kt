@@ -31,7 +31,7 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
 
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
-                viewModel.refresh()
+                viewModel.refreshLoginUser()
             }
             avatar.setOnClickListener {
                 viewModel.avatarClicked()

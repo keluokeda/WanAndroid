@@ -5,19 +5,17 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.hi.dhl.binding.viewbind
 import com.ke.wanandroid.R
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
-import com.ke.wanandroid.databinding.FragmentHomeBinding
+import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
+class HomeFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
-    private val binding: FragmentHomeBinding by viewbind()
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = homeViewModel
+    private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
+    override val articleListViewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,17 +24,17 @@ class HomeFragment : BaseArticleListFragment(R.layout.fragment_home) {
 
 
 
-        homeViewModel.bannerData.observe(viewLifecycleOwner) {
 
-        }
         setupRetry(binding.retry, binding.recyclerView, homeViewModel)
 
 
-        setRefreshAndLoadMore(
+        setup(
             binding.swipeRefreshLayout,
             homeViewModel,
-            adapter,
+            articleAdapter,
             binding.recyclerView
         )
+
+        setupSnackbar(articleListViewModel)
     }
 }

@@ -1,4 +1,4 @@
-package com.ke.wanandroid.mine.domain.login
+package com.ke.wanandroid.common.domain
 
 import com.ke.mvvm.base.domian.UseCase
 import com.ke.wanandroid.common.data.UserDataStore

@@ -1,23 +1,16 @@
 package com.ke.wanandroid.officialaccount.ui.officialaccounts
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.ke.mvvm.base.data.Result
-import com.ke.wanandroid.api.response.WanBaseListResponse
-import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.ui.tab.BaseTabViewModel
+import com.ke.wanandroid.officialaccount.domain.article.GetTopicsUseCase
+import com.ke.wanandroid.officialaccount.domain.article.LoadTopicsUseCase
 
 
-class OfficialAccountsViewModel @ViewModelInject constructor(private val officialAccountsRepository: OfficialAccountsRepository) :
-    BaseTabViewModel() {
-
-
-    init {
-        loadData()
-    }
-
-    override suspend fun getTopics(): Result<WanBaseListResponse<WanTopicResponse>> {
-        return officialAccountsRepository.getTopicList()
-    }
+class OfficialAccountsViewModel @ViewModelInject constructor(
+    getTopicsUseCase: GetTopicsUseCase,
+    loadTopicsUseCase: LoadTopicsUseCase
+) :
+    BaseTabViewModel(getTopicsUseCase, loadTopicsUseCase) {
 
 
 }

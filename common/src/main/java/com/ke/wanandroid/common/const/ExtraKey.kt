@@ -7,5 +7,7 @@ class ExtraKey private constructor() {
         const val URL = "URL"
         const val USER_ID = "USER_ID"
         const val TOPIC = "TOPIC"
+
+        const val TYPE = "TYPE"
     }
 }

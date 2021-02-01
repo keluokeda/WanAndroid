@@ -10,9 +10,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.mvvm.base.ui.FragmentViewPager2Adapter
-import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.FragmentBaseTabBinding
+import com.ke.wanandroid.common.db.Topic
 
 abstract class BaseTabFragment : BaseFragment(R.layout.fragment_base_tab) {
 
@@ -21,11 +21,11 @@ abstract class BaseTabFragment : BaseFragment(R.layout.fragment_base_tab) {
     protected abstract val viewModel: BaseTabViewModel
 
 
-    abstract fun createArticleListFragment(wanTopicResponse: WanTopicResponse): Fragment
+    abstract fun createArticleListFragment(topic: Topic): Fragment
 
     abstract fun initToolbar(
         toolbar: MaterialToolbar,
-        list: List<WanTopicResponse>,
+        list: List<Topic>,
         viewPager: ViewPager2
     )
 
@@ -42,9 +42,13 @@ abstract class BaseTabFragment : BaseFragment(R.layout.fragment_base_tab) {
             binding.retry.isVisible = it
         }
         binding.retry.setOnClickListener {
-            viewModel.loadData()
+            viewModel.retry()
         }
-        viewModel.topicList.observe(viewLifecycleOwner) { list ->
+        viewModel.topics.observe(viewLifecycleOwner) { list ->
+
+            if (list.isEmpty()) {
+                return@observe
+            }
             binding.viewPager.adapter =
                 FragmentViewPager2Adapter(
                     this,

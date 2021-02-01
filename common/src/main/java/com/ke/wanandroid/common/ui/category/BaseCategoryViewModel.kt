@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
+import com.ke.mvvm.base.domian.UseCase
 import com.ke.mvvm.base.ui.BaseViewModel
 import com.ke.wanandroid.api.response.WanTopicResponse
 import kotlinx.coroutines.launch
 
-abstract class BaseCategoryViewModel(private val categoryRepository: BaseCategoryRepository) :
+abstract class BaseCategoryViewModel(private val getCategoryUseCase: UseCase<Unit, List<WanTopicResponse>>) :
     BaseViewModel() {
 
     private val _topicList = MutableLiveData<List<WanTopicResponse>>()
@@ -26,7 +27,7 @@ abstract class BaseCategoryViewModel(private val categoryRepository: BaseCategor
             _loadingViewVisible.value = true
             _retryViewVisible.value = false
 
-            when (val result = categoryRepository.getCategoryList()) {
+            when (val result = getCategoryUseCase(Unit)) {
                 is Result.Success -> {
                     _topicList.value = result.data
                     _loadingViewVisible.value = false

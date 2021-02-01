@@ -1,39 +1,55 @@
 package com.ke.wanandroid.common.ui.tab
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.ke.mvvm.base.data.Result
+import com.ke.mvvm.base.domian.LiveDataUseCase
+import com.ke.mvvm.base.domian.UseCase
 import com.ke.mvvm.base.ui.BaseViewModel
-import com.ke.wanandroid.api.response.WanBaseListResponse
-import com.ke.wanandroid.api.response.WanTopicResponse
+import com.ke.wanandroid.common.db.Topic
 import kotlinx.coroutines.launch
 
-abstract class BaseTabViewModel : BaseViewModel() {
-    private val _topicList = MutableLiveData<List<WanTopicResponse>>()
-
-    val topicList: LiveData<List<WanTopicResponse>>
-        get() = _topicList
-
-    fun loadData() {
-        viewModelScope.launch {
+abstract class BaseTabViewModel(
+    getTopicsUseCase: LiveDataUseCase<Unit, List<Topic>>,
+    private val loadTopicsUseCase: UseCase<Unit, Unit>
+) :
+    BaseViewModel() {
+    val topics: LiveData<List<Topic>> = getTopicsUseCase.invoke(Unit).map {
+        if (it.isEmpty()) {
             _loadingViewVisible.value = true
-            _retryViewVisible.value = false
             _contentViewVisible.value = false
-            val result = getTopics()
+            loadTopicData()
+        } else {
             _loadingViewVisible.value = false
-            when (result) {
+            _contentViewVisible.value = true
+        }
+        it
+    }
+
+    override fun retry() {
+        super.retry()
+        _loadingViewVisible.value = true
+        _retryViewVisible.value = false
+        _contentViewVisible.value = false
+
+        loadTopicData()
+    }
+
+    private fun loadTopicData() {
+        viewModelScope.launch {
+            when (loadTopicsUseCase(Unit)) {
                 is Result.Success -> {
-                    _contentViewVisible.value = true
-                    _topicList.value = result.data.data
+
                 }
                 is Result.Error -> {
-                    _contentViewVisible.value = false
-                    _retryViewVisible.value = true
+                    if (topics.value.isNullOrEmpty()) {
+                        _loadingViewVisible.value = false
+                        _retryViewVisible.value = true
+                        _contentViewVisible.value = false
+                    }
                 }
             }
         }
     }
-
-    abstract suspend fun getTopics(): Result<WanBaseListResponse<WanTopicResponse>>
 }

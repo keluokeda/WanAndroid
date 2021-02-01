@@ -27,6 +27,12 @@ interface WanApiService {
     ): WanBaseResponse<WanLoginResponse>
 
     /**
+     * 退出登录
+     */
+    @GET("/user/logout/json")
+    suspend fun logout(): WanBaseResponse<Any>
+
+    /**
      * 首页banner
      */
     @GET("banner/json")
@@ -38,7 +44,7 @@ interface WanApiService {
      * 参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/list/{page}/json")
-    suspend fun getArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
+    suspend fun getHomeArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
 
     /**

@@ -1,7 +1,6 @@
 package com.ke.wanandroid.ui.answer
 
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -11,8 +10,7 @@ import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.common.R
 import com.ke.wanandroid.common.databinding.ItemArticleBinding
 import com.ke.wanandroid.common.databinding.LayoutBaseRefreshListRetryBinding
-import com.ke.wanandroid.common.ui.BaseArticleListFragment
-import com.ke.wanandroid.common.ui.BaseArticleListViewModel
+import com.ke.wanandroid.common.ui.article.BaseArticleListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,10 +18,7 @@ class AnswerFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
 
     private var isFirstResume = true
 
-    private val viewModel: AnswerViewModel by viewModels()
-
-    override val baseArticleListViewModel: BaseArticleListViewModel<*>
-        get() = viewModel
+    override val articleListViewModel: AnswerViewModel by viewModels()
 
     private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
 
@@ -31,7 +26,7 @@ class AnswerFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
         super.onResume()
         if (isFirstResume) {
             isFirstResume = false
-            viewModel.refresh()
+            articleListViewModel.refresh()
         }
     }
 
@@ -42,13 +37,18 @@ class AnswerFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
         super.bindData(holder, item)
         holder.viewBinding.isNew.isVisible = false
         holder.viewBinding.tag.isVisible = false
-        holder.viewBinding.desc.text = Html.fromHtml(item.desc)
+//        holder.viewBinding.desc.text = Html.fromHtml(item.desc)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
-
+        setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
+        setup(
+            binding.swipeRefreshLayout,
+            articleListViewModel,
+            articleAdapter,
+            binding.recyclerView
+        )
+        setupSnackbar(articleListViewModel)
     }
 }

@@ -1,7 +1,7 @@
 package com.ke.wanandroid.common
 
 import android.os.Parcelable
-import androidx.appcompat.app.AppCompatDelegate
+import android.text.Html
 import androidx.core.view.isVisible
 import com.bumptech.glide.RequestManager
 import com.ke.mvvm.base.data.BaseDataListRepository
@@ -40,17 +40,6 @@ private fun <R : Parcelable> getListResultFromWanBaseResponse(
 }
 
 
-val nightModeList = listOf(
-    AppCompatDelegate.MODE_NIGHT_UNSPECIFIED,
-    AppCompatDelegate.MODE_NIGHT_YES,
-    AppCompatDelegate.MODE_NIGHT_NO,
-    AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY,
-    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-)
-val nightModeDescriptionList = listOf(
-    "默认", "深色", "浅色", "跟随电量", "跟随系统"
-)
-
 fun ItemArticleBinding.bindArticle(item: WanArticleResponse, requestManager: RequestManager) {
     isNew.isVisible = item.fresh
     author.text =
@@ -66,9 +55,9 @@ fun ItemArticleBinding.bindArticle(item: WanArticleResponse, requestManager: Req
     title.text = item.title
     desc.isVisible = item.desc.isNotEmpty()
     title.maxLines = if (item.desc.isNotEmpty()) 1 else 3
-    desc.text = item.desc
+    desc.text = Html.fromHtml(item.desc)
     chapter.text =
-        if (item.superChapterName.isNotEmpty()) item.superChapterName + ":" else   item.chapterName
+        if (item.superChapterName.isNotEmpty()) item.superChapterName + ":" + item.chapterName else item.chapterName
     time.text = item.niceDate
 }
 
