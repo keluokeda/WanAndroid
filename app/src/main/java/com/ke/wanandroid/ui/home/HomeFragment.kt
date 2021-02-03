@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_retry) {
 
-    private val homeViewModel: HomeViewModel by viewModels()
 
     private val binding: LayoutBaseRefreshListRetryBinding by viewbind()
     override val articleListViewModel: HomeViewModel by viewModels()
@@ -25,12 +24,12 @@ class HomeFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_r
 
 
 
-        setupRetry(binding.retry, binding.recyclerView, homeViewModel)
+        setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
 
 
         setup(
             binding.swipeRefreshLayout,
-            homeViewModel,
+            articleListViewModel,
             articleAdapter,
             binding.recyclerView
         )

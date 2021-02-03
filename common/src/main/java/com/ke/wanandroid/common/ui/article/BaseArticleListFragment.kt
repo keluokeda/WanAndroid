@@ -94,6 +94,7 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
                 DividerItemDecoration.VERTICAL
             )
         )
+        setupSnackbar(articleListViewModel)
     }
 
     protected open fun bindData(

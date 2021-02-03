@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WanAndroid"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.search.SearchActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -22,10 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-
+        <activity android:name=".MainActivity"/>
         <activity android:name=".ui.sort.TopicSortActivity" />
     </application>
 

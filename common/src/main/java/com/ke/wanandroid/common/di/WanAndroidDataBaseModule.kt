@@ -2,10 +2,7 @@ package com.ke.wanandroid.common.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ke.wanandroid.common.db.ArticleRecordDao
-import com.ke.wanandroid.common.db.LaterReadDao
-import com.ke.wanandroid.common.db.TopicDao
-import com.ke.wanandroid.common.db.WanAndroidDataBase
+import com.ke.wanandroid.common.db.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +32,8 @@ object WanAndroidDataBaseModule {
     @Provides
     fun provideTopicDao(wanAndroidDataBase: WanAndroidDataBase): TopicDao =
         wanAndroidDataBase.topicDao()
+
+    @Provides
+    fun provideSearchHistoryDao(wanAndroidDataBase: WanAndroidDataBase): SearchHistoryDao =
+        wanAndroidDataBase.searchHistoryDao()
 }

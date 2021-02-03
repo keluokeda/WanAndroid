@@ -46,6 +46,8 @@ interface UserDataStore {
      * 我的头部背景图
      */
     var meHeaderBackgroundImagePath: String?
+
+
 }
 
 @Singleton

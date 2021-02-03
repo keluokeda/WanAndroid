@@ -3,12 +3,14 @@ package com.ke.wanandroid.ui.main
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hi.dhl.binding.viewbind
 import com.ke.mvvm.base.ui.BaseFragment
 import com.ke.mvvm.base.ui.FragmentViewPager2Adapter
 import com.ke.wanandroid.common.R
+import com.ke.wanandroid.common.const.PagePath
 import com.ke.wanandroid.common.databinding.FragmentBaseTabBinding
 import com.ke.wanandroid.ui.answer.AnswerFragment
 import com.ke.wanandroid.ui.home.HomeFragment
@@ -28,7 +30,7 @@ class MainFragment : BaseFragment(R.layout.fragment_base_tab) {
             menu.add(0, 1, 0, "搜索").setIcon(R.drawable.baseline_search_toolbar_24dp)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
             setOnMenuItemClickListener {
-
+                ARouter.getInstance().build(PagePath.APP_SEARCH).navigation()
                 true
             }
         }

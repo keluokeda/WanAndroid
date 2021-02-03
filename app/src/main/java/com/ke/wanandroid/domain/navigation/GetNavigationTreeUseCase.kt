@@ -1,15 +1,15 @@
 package com.ke.wanandroid.domain.navigation
 
 import com.ke.mvvm.base.domian.UseCase
-import com.ke.wanandroid.api.WanApiService
 import com.ke.wanandroid.api.response.WanTopicResponse
 import com.ke.wanandroid.common.di.IoDispatcher
+import com.ke.wanandroid.data.NavigationRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class GetNavigationCategoryUseCase @Inject constructor(
+class GetNavigationTreeUseCase @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher,
-    private val wanApiService: WanApiService
+    private val navigationRepository: NavigationRepository
 ) : UseCase<Unit, List<WanTopicResponse>>(dispatcher) {
     override suspend fun execute(parameters: Unit): List<WanTopicResponse> {
         val list = mutableListOf<WanTopicResponse>()
@@ -24,7 +24,7 @@ class GetNavigationCategoryUseCase @Inject constructor(
     }
 
     private suspend fun getTopicList(): List<WanTopicResponse> {
-        val list = wanApiService.getNavigationTree().data!!
+        val list = navigationRepository.getNavigationTree().data!!
         val result = mutableListOf<WanTopicResponse>()
 
         list.forEach { navigation ->

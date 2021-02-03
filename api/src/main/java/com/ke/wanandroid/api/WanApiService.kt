@@ -1,5 +1,6 @@
 package com.ke.wanandroid.api
 
+import androidx.annotation.IntRange
 import com.ke.wanandroid.api.response.*
 import retrofit2.http.*
 
@@ -44,7 +45,7 @@ interface WanApiService {
      * 参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/list/{page}/json")
-    suspend fun getHomeArticleList(@Path("page") page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
+    suspend fun getHomeArticleList(@Path("page") @IntRange(from = 0) page: Int): WanBaseResponse<WanListResponse<WanArticleResponse>>
 
 
     /**
@@ -205,6 +206,21 @@ interface WanApiService {
     suspend fun getAnswers(
         @Path("page") page: Int
     ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
+    /**
+     * 搜索文章
+     */
+    @POST("/article/query/{page}/json")
+    suspend fun search(
+        @Path("page") @IntRange(from = 0) page: Int,
+        @Query("k") keyword: String
+    ): WanBaseResponse<WanListResponse<WanArticleResponse>>
+
+    /**
+     * 热搜
+     */
+    @GET("/hotkey/json")
+    suspend fun getHotKeys(): WanBaseListResponse<WanHotKeyResponse>
 
     companion object {
         const val BASE_URL = "https://www.wanandroid.com"

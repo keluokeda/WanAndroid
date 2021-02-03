@@ -52,7 +52,7 @@ fun ItemArticleBinding.bindArticle(item: WanArticleResponse, requestManager: Req
         image.isVisible = true
         requestManager.load(item.envelopePic).into(image)
     }
-    title.text = item.title
+    title.text = Html.fromHtml(item.title)
     desc.isVisible = item.desc.isNotEmpty()
     title.maxLines = if (item.desc.isNotEmpty()) 1 else 3
     desc.text = Html.fromHtml(item.desc)
