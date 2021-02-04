@@ -1,6 +1,5 @@
 # 基于MVVM架构JetPack组件的 WanAndroid 客户端
 
-### 项目中使用到的WanAndroid的接口放在了api模块下，有需要的可以直接使用。
 [看app截图点这里](https://www.jianshu.com/p/b6cae51ecaa1)
 ### 项目中使用到的WanAndroid的接口放在了api模块下，有需要的可以直接使用。
 #### 导入方式
