@@ -1,7 +1,34 @@
 # 基于MVVM架构JetPack组件的 WanAndroid 客户端
-## 目前还在施工中
-#### 项目中使用到的WanAndroid的接口放在了api模块下，有需要的可以直接使用。
 
+### 项目中使用到的WanAndroid的接口放在了api模块下，有需要的可以直接使用。
+#### 导入方式
+##### 将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+##### 添加依赖项
+```
+dependencies {
+	        implementation 'com.github.keluokeda:WanAndroid:1.0.0'
+	}
+```
+##### 构建属于你的WanApiServie
+```
+@Provides
+    @Singleton
+    fun provideWanApiService(okHttpClient: OkHttpClient): WanApiService {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(WanApiService.BASE_URL)
+            .build().create(WanApiService::class.java)
+    }
+```
 ## 主要功能
 - [x] 首页、项目、公众号、体系、我的五大模块
 - [x] 夜间模式设置功能
@@ -16,9 +43,8 @@
 - [x] 公众号以及项目主分类排序、启用和禁用功能
 - [x] 退出登录功能
 - [x] 稍后阅读：添加文章进入稍后阅读以及删除稍后阅读功能
-- [ ] 搜索：热门搜索、查看搜索历史以及删除搜索历史
-- [ ] 清除缓存
-- [ ] 关于我们
+- [x] 搜索：热门搜索、查看搜索历史以及删除搜索历史
+
 ## 项目技术点
 - 使用kotlin语言开发
 - 使用MVVM架构
