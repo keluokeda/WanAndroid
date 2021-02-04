@@ -1,12 +1,11 @@
+
 package com.ke.wanandroid.common
 
 import android.os.Parcelable
 import android.text.Html
 import androidx.core.view.isVisible
 import com.bumptech.glide.RequestManager
-import com.ke.mvvm.base.data.BaseDataListRepository
 import com.ke.mvvm.base.data.ListResult
-import com.ke.mvvm.base.domian.GetDataListUseCase
 import com.ke.wanandroid.api.response.WanArticleResponse
 import com.ke.wanandroid.api.response.WanBaseResponse
 import com.ke.wanandroid.api.response.WanListResponse
@@ -17,15 +16,8 @@ fun String.log() {
     Logger.d(this)
 }
 
-suspend fun <P, R : Parcelable> BaseDataListRepository<P, R>.getListResultFromWanResponse(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
-    return try {
-        getListResultFromWanBaseResponse(method.invoke())
-    } catch (e: Exception) {
-        getListResultWhenError(e)
-    }
-}
 
-suspend fun <P, R : Parcelable> GetDataListUseCase<P, R>.getListResultFromWanResponse(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
+suspend fun <R : Parcelable> getListResultFromWanResponse(method: suspend () -> WanBaseResponse<WanListResponse<R>>): ListResult<R> {
     return getListResultFromWanBaseResponse(method.invoke())
 }
 

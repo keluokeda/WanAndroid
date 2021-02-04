@@ -15,7 +15,7 @@ class GetUserSharedArticlesUseCase @Inject constructor(
 ) :
     GetDataListUseCase<Int, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Int): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             articlesRepository.getUserSharedArticles(parameters, index)
         }
     }

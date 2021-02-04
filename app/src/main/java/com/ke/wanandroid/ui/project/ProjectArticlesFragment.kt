@@ -44,7 +44,7 @@ class ProjectArticlesFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             articleListViewModel,
             articleAdapter,

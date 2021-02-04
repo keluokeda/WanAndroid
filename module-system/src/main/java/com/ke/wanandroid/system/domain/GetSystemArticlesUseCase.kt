@@ -15,7 +15,7 @@ class GetSystemArticlesUseCase @Inject constructor(
 ) :
     GetDataListUseCase<Int, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Int): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             systemRepository.getArticles(index, parameters)
         }
     }

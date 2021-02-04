@@ -30,7 +30,7 @@ class MyCollectionsFragment :
 
         setupSnackbar(articleListViewModel)
 
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             articleListViewModel,
             articleAdapter,

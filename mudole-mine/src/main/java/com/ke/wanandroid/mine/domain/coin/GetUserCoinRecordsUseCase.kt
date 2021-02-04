@@ -14,7 +14,7 @@ class GetUserCoinRecordsUseCase @Inject constructor(
     private val coinRepository: CoinRepository
 ) : GetDataListUseCase<Unit, WanCoinResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Unit): ListResult<WanCoinResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             coinRepository.getCoinRecords(index)
         }
     }

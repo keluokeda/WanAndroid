@@ -43,7 +43,7 @@ class AnswerFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             articleListViewModel,
             articleAdapter,

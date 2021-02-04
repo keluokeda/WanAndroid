@@ -27,7 +27,7 @@ class HomeFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list_r
         setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
 
 
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             articleListViewModel,
             articleAdapter,

@@ -40,7 +40,7 @@ class ArticleListFragment :
         setupRetry(binding.retry, binding.recyclerView, articleListViewModel)
 //        setRefreshAndLoadMore(binding.swipeRefreshLayout, viewModel, adapter, binding.recyclerView)
 
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             articleListViewModel,
             articleAdapter,

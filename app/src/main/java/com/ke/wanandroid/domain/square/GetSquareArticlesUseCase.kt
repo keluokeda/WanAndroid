@@ -14,7 +14,7 @@ class GetSquareArticlesUseCase @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : GetDataListUseCase<Unit, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Unit): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             articlesRepository.getSquareArticles(index)
         }
     }

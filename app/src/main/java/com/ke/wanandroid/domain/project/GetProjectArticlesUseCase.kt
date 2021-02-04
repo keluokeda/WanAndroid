@@ -14,7 +14,7 @@ class GetProjectArticlesUseCase @Inject constructor(
     private val articlesRepository: ArticlesRepository
 ) : GetDataListUseCase<Int, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Int): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             articlesRepository.getProjectArticles(index, parameters)
         }
     }

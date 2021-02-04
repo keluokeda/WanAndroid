@@ -14,7 +14,7 @@ class GetMySharedArticlesUseCase @Inject constructor(
     private val articlesRepository: ArticlesRepository
 ) : GetDataListUseCase<Unit, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Unit): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             articlesRepository.getMySharedArticles(index)
         }
     }

@@ -30,16 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <TextView
-        android:id="@+id/current_night_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/night_mode"
-        app:layout_constraintEnd_toEndOf="@id/night_mode"
-        app:layout_constraintTop_toTopOf="@id/night_mode"
-        tools:text="跟随系统" />
 
     <TextView
         android:id="@+id/about"
@@ -49,6 +39,7 @@
         android:background="?selectableItemBackground"
         android:padding="16dp"
         android:text="关于我们"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/night_mode" />

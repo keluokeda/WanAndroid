@@ -15,7 +15,7 @@ class GetSearchResultUseCase @Inject constructor(
 ) :
     GetDataListUseCase<String, WanArticleResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: String): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             searchRepository.getSearchResult(index, parameters)
         }
     }

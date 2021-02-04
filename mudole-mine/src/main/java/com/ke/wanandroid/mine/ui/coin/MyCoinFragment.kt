@@ -49,7 +49,7 @@ class MyCoinFragment : BaseDataListFragment(R.layout.mine_fragment_my_coin) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             viewModel,
             adapter,

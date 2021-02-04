@@ -60,6 +60,9 @@ class MineFragment : BaseFragment(R.layout.mine_fragment_mine) {
             setting.setOnClickListener {
                 ARouter.getInstance().build(PagePath.SETTINGS).navigation()
             }
+            aboutAuthor.setOnClickListener {
+                ARouter.getInstance().build(PagePath.ABOUT_AUTHOR).navigation()
+            }
         }
 
         viewModel.isRefreshing.observe(viewLifecycleOwner) {

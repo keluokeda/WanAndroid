@@ -81,13 +81,13 @@ abstract class BaseArticleListFragment(layoutId: Int) : BaseDataListFragment(lay
         }
     }
 
-    override fun <R> setup(
+    override fun <R> setupRefreshAndLoadMore(
         swipeRefreshLayout: SwipeRefreshLayout,
         viewModel: BaseRefreshAndLoadMoreViewModel<*, R>,
         adapter: BaseQuickAdapter<R, *>,
         recyclerView: RecyclerView
     ) {
-        super.setup(swipeRefreshLayout, viewModel, adapter, recyclerView)
+        super.setupRefreshAndLoadMore(swipeRefreshLayout, viewModel, adapter, recyclerView)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),

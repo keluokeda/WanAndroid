@@ -3,7 +3,9 @@
     package="com.ke.wanandroid.settings">
 
     <application>
-        <activity android:name="com.ke.wanandroid.settings.ui.main.SettingsActivity"/>
-        <activity android:name="com.ke.wanandroid.settings.ui.nightmode.NightModeActivity"/>
+        <activity android:name=".ui.about.AboutActivity"></activity>
+        <activity android:name=".ui.main.SettingsActivity" />
+        <activity android:name=".ui.nightmode.NightModeActivity" />
     </application>
+
 </manifest>

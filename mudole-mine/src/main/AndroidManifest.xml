@@ -3,6 +3,7 @@
     package="com.ke.wanandroid.mine">
 
     <application>
+        <activity android:name=".ui.aboutauthor.AboutAuthorActivity"></activity>
         <activity android:name=".ui.coinrank.CoinRankActivity" />
         <activity android:name=".ui.login.LoginRegisterActivity" />
         <activity android:name=".ui.coin.MyCoinActivity" />

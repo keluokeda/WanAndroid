@@ -38,5 +38,7 @@ class PagePath private constructor() {
         const val TOPIC_SORT = "/topic/sort"
 
         const val APP_SEARCH = "/app/search"
+
+        const val ABOUT_AUTHOR = "/mine/aboutAuthor"
     }
 }

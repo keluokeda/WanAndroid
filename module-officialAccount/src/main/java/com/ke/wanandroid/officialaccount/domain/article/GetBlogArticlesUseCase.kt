@@ -17,7 +17,7 @@ class GetBlogArticlesUseCase @Inject constructor(
         index: Int,
         parameters: Pair<Int, String?>
     ): ListResult<WanArticleResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             articlesRepository.getBlogArticles(index, parameters.first, parameters.second)
         }
     }

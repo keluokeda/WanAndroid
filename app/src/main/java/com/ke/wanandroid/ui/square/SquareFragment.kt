@@ -34,7 +34,7 @@ class SquareFragment : BaseArticleListFragment(R.layout.layout_base_refresh_list
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRetry(binding.retry, binding.recyclerView, viewModel)
-        setup(
+        setupRefreshAndLoadMore(
             binding.swipeRefreshLayout,
             viewModel,
             articleAdapter,

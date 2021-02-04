@@ -14,7 +14,7 @@ class GetCoinRankUseCase @Inject constructor(
     private val coinRepository: CoinRepository
 ) : GetDataListUseCase<Unit, WanUserInfoResponse>(dispatcher) {
     override suspend fun execute(index: Int, parameters: Unit): ListResult<WanUserInfoResponse> {
-        return getListResultFromWanResponse {
+        return getListResultFromWanResponse() {
             coinRepository.getCoinRank(index)
         }
     }
